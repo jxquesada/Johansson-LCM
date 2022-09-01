@@ -14,7 +14,7 @@ from openpyxl import load_workbook  #Biblioteca para cargar excel ya existente
 import smtplib, ssl
 
 ################## Creación de ventana ##################
-
+##
 window=Tk()
 window.title("Calibración de bloques")          #Nombre de la ventana
 window.resizable(0,0)                           #No permite cambiar dimensiones de la venta
