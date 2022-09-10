@@ -1,0 +1,93 @@
+#:kivy 2.1.0
+MainInfoBoxLayout:
+
+
+#Costantes generales
+
+#:set backgoundColorDarkLv1 0.16,0.16,0.25,1
+#:set backgoundColorDarkLv2 0.07,0.07,0.16,1
+#:set menuButtonColor 0.16,0.16,0.25,1
+#:set textColorDark 1,1,1,1
+#:set Version "2.0.0"
+
+#<MainWidget>:
+<MainInfoBoxLayout>:
+    orientation: "horizontal"
+    canvas.before:
+        Color:
+            rgba: backgoundColorDarkLv1#
+        Rectangle:
+            #pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: None, 1
+        width: "250dp"
+        #height: "500dp"
+        #pos_hint: { "top": 1 }
+        Label:
+            text: root.temperatureText
+            size_hint: 1, 0.5
+        
+        ScrollView:
+            #size_hint: None, None
+            #height: "100dp"
+            BoxLayout:
+
+                orientation: "vertical"
+                #padding: "0dp", "0dp", "10dp", "0dp"
+                #spacing: "7dp"
+                size_hint: 1, None
+                height: "400dp"
+                pos_hint: { "center": 1 }
+                        
+                Button:
+                    text: "Calibrar Bloques"
+                    background_normal: ''
+                    background_color: menuButtonColor
+
+                    on_press: root.blocksCalibrationButton_click()
+                Button:
+                    text: "Resultados"
+                    size_hint: 1, 1
+                    background_normal: ''
+                    background_color: menuButtonColor
+
+                    on_press: root.resultsButton_click()
+
+                Button:
+                    text: "Patrones"
+                    background_normal: ''
+                    background_color: menuButtonColor
+
+                    on_press: root.patternsButton_click()
+                Button:
+                    text: "Usuarios"
+                    background_normal: ''
+                    background_color: menuButtonColor
+
+                    on_press: root.usersButton_click()
+                Button:
+                    text: "Configuracion"
+                    color: 1, 1, 1, 1
+                    size_hint: 1, 1
+                    background_normal: ''
+                    background_color: menuButtonColor
+
+                    on_press: root.configurationButton_click()
+
+        Label:
+            size_hint: 1, 0.3
+            text: "Comparador de Bloques\n                LCM\n         Version "+Version      
+
+    ScrollView:
+        BoxLayout:
+            orientation: "vertical"
+            canvas.before:
+                Color:
+                    rgba: backgoundColorDarkLv2
+                Rectangle:
+                    #pos: self.pos
+                    size: self.size
+        
