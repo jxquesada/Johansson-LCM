@@ -1,13 +1,16 @@
 #:kivy 2.1.0
 MainInfoBoxLayout:
+# Canvas2:
 
 
 #Costantes generales
 
-#:set backgoundColorDarkLv1 0.16,0.16,0.25,1
-#:set backgoundColorDarkLv2 0.07,0.07,0.16,1
-#:set menuButtonColor 0.16,0.16,0.25,1
-#:set textColorDark 1,1,1,1
+#:set backgoundColorDarkLv1 0.15, 0.15, 0.15, 1
+#:set backgoundColorDarkLv2 0.125, 0.125, 0.125, 1
+#:set backgoundColorDarkLv3 0.1, 0.1, 0.1, 1
+#:set menuButtonColor       0.15, 0.15, 0.15, 1
+#:set textColorDark         1, 1, 1, 1
+#:set lineColorDark         1, 1, 1, 1
 #:set Version "2.0.0"
 
 #<MainWidget>:
@@ -17,27 +20,32 @@ MainInfoBoxLayout:
         Color:
             rgba: backgoundColorDarkLv1#
         Rectangle:
-            #pos: self.pos
+            pos: self.pos
             size: self.size
-
+    canvas.after:
+        Color:
+            rgba:lineColorDark
+        Line:
+            points: (10,self.height*0.6,240,self.height*0.6)
     BoxLayout:
         orientation: "vertical"
         size_hint: None, 1
         width: "250dp"
-        #height: "500dp"
-        #pos_hint: { "top": 1 }
+        BoxLayout:
+            padding: "20dp"
+            size_hint: 1,0.5
+            Image:
+                source: "icons/LCM_logo_black.png"
+                
         Label:
             text: root.temperatureText
             size_hint: 1, 0.5
+            #background_color: backgoundColorDarkLv1
         
         ScrollView:
-            #size_hint: None, None
-            #height: "100dp"
             BoxLayout:
 
                 orientation: "vertical"
-                #padding: "0dp", "0dp", "10dp", "0dp"
-                #spacing: "7dp"
                 size_hint: 1, None
                 height: "400dp"
                 pos_hint: { "center": 1 }
@@ -75,19 +83,62 @@ MainInfoBoxLayout:
                     background_normal: ''
                     background_color: menuButtonColor
 
-                    on_press: root.configurationButton_click()
+                    on_press: root.usersButton_click()
 
         Label:
-            size_hint: 1, 0.3
-            text: "Comparador de Bloques\n                LCM\n         Version "+Version      
-
-    ScrollView:
-        BoxLayout:
-            orientation: "vertical"
             canvas.before:
                 Color:
-                    rgba: backgoundColorDarkLv2
+                    rgba: backgoundColorDarkLv2#
                 Rectangle:
-                    #pos: self.pos
+                    pos: self.pos
                     size: self.size
+            size_hint: 1, 0.3
+            text: "Comparador de Bloques\n                LCM\n         Version "+Version 
+    
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Color:
+                rgba: backgoundColorDarkLv2#
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            #id: selectedSection_title
+            text: root.selectedButtonName
+            size_hint: 1, 0.1
         
+        ScrollView:
+            canvas.before:
+                Color:
+                    rgba: backgoundColorDarkLv3
+                Rectangle:
+                    pos: self.pos
+                    size: self.size       
+            UsersStackLayout:
+            
+
+
+
+<UsersStackLayout>
+    id: configurationStack_layout
+    size_hint: 1, None
+    orientation: "lr-bt"
+    height: self.minimum_height
+        
+    Button:
+        text: "Add button"
+        size_hint: 1, None
+        height: "100dp"
+        index: 0
+    
+        on_press: root.addButton()
+
+
+
+<Canvas2@Widget>
+    canvas:
+        Color:
+            rgba: 1,1,0,1
+        Line:
+            points: (self.width*0.01,10,self.width*0.99,10)
