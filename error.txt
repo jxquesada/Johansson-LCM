@@ -1,0 +1,25 @@
+[CRITICAL] [Window      ] Unable to find any valuable Window provider. Please enable debug logging (e.g. add -d if running from the command line, or change the log level in the config) and re-run your app to identify potential causes
+sdl2 - ImportError: libSDL2_ttf-2.0.so.0: cannot open shared object file: No such file or directory
+  File "/home/pi/.local/lib/python3.7/site-packages/kivy/core/__init__.py", line 63, in core_select_lib
+    fromlist=[modulename], level=0)
+  File "<frozen importlib._bootstrap>", line 1086, in __import__
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/pi/.local/lib/python3.7/site-packages/kivy/core/window/window_sdl2.py", line 28, in <module>
+    from kivy.core.window._window_sdl2 import _WindowSDL2Storage
+  File "/usr/lib/python3/dist-packages/thonny/plugins/cpython/cpython_backend.py", line 314, in _custom_import
+    module = self._original_import(*args, **kw)
+
+x11 - ModuleNotFoundError: No module named 'kivy.core.window.window_x11'
+  File "/home/pi/.local/lib/python3.7/site-packages/kivy/core/__init__.py", line 63, in core_select_lib
+    fromlist=[modulename], level=0)
+  File "<frozen importlib._bootstrap>", line 1086, in __import__
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 965, in _find_and_load_unlocked
+
+[CRITICAL] [App         ] Unable to get a Window, abort.
