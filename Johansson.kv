@@ -1,5 +1,5 @@
 #:kivy 2.1.0
-MainInfoBoxLayout:
+#MainInfoBoxLayout:
 # Canvas2:
 
 
@@ -13,8 +13,9 @@ MainInfoBoxLayout:
 #:set lineColorDark         1, 1, 1, 1
 #:set Version "2.0.0"
 
-#<MainWidget>:
-<MainInfoBoxLayout>:
+#<HomeWidget>:
+#    MainInfoBoxLayout:
+<HomeBoxLayout>
     orientation: "horizontal"
     canvas.before:
         Color:
@@ -115,7 +116,7 @@ MainInfoBoxLayout:
                 Rectangle:
                     pos: self.pos
                     size: self.size       
-            UsersStackLayout:
+            # UsersStackLayout:
             
 
 

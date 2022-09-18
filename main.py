@@ -1,30 +1,30 @@
 from ast import Pass
 from kivy.app import App #librería principal para GUI kivy
 from kivy.uix.widget import Widget
+from kivy.properties import ObjectProperty
+from kivy.properties import StringProperty
+from kivy.properties import NumericProperty
+from kivy.lang import Builder
+
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.scrollview import ScrollView
-from kivy.properties import StringProperty
-from kivy.properties import NumericProperty
+
+
+#Builder.load_file('Johansson.kv')
 
 
 
+    
 
-class JohanssonApp(App):
-    """
-    Clase principal de kivy,
-    Usada para inicializar la GUI principal
-    """
-    pass
+# class HomeWidget(BoxLayout):#BoxLayout Widget:
+#     """
+#     Elemento principal usado para agregar personalizar la interfaz
+#     """
+#     pass
 
-class MainWidget(Widget):
-    """
-    Elemento principal usado para agregar personalizar la interfaz
-    """
-    pass
-
-class MainInfoBoxLayout(BoxLayout):
+class HomeBoxLayout(BoxLayout):
     temperatureText = StringProperty("Temperatura")
     selectedButtonName = StringProperty("Home")
 
@@ -57,4 +57,16 @@ class UsersStackLayout(StackLayout):
         self.add_widget(newButton,index=self.newButtonID)
         self.newButtonID +=1
 
-JohanssonApp().run()
+
+
+
+class JohanssonApp(App):
+    """
+    Clase principal de kivy,
+    Usada para inicializar la GUI principal
+    """
+    def build(self):
+        return HomeBoxLayout()
+
+if __name__=='__main__':
+    JohanssonApp().run()
