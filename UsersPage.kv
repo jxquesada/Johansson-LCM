@@ -1,0 +1,19 @@
+#:kivy 2.1.0
+#UsersPage:
+
+<UsersPageLayout>:
+    ScrollView:
+        StackLayout:
+            orientation: "lr-tb"
+            size_hint: 1, None
+            height: "500dp"
+
+            Label:
+                size_hint: 1, None
+                height: "100dp"
+                text: "Users"
+            Button:
+                size_hint: 1, None
+                height: "100dp"
+                text: "ok"
+                on_press: print("pressed")

@@ -1,8 +1,126 @@
 #:kivy 2.1.0
-ConfigurationPageBoxLayout:
+#ConfigurationPageBoxLayout:
 
-<ConfigurationPageStackLayout>:
+
+#:set backgoundColorDarkLv1 0.15, 0.15, 0.15, 1
+#:set backgoundColorDarkLv2 0.125, 0.125, 0.125, 1
+#:set backgoundColorDarkLv3 0.1, 0.1, 0.1, 1
+#:set menuButtonColor       0.15, 0.15, 0.15, 1
+#:set menuButtonColorHighlight       0.17, 0.17, 0.17, 1
+#:set textColorDark         1, 1, 1, 1
+#:set lineColorDark         1, 1, 1, 1
+
+
+<ConfigurationPageLayout>:
     ScrollView:
         StackLayout:
+            orientation: "lr-tb"
+            size_hint: 1, None
+            height: "800dp"
+
+            
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint: 1, None
+                height: "100dp"
+                Label:
+                    size_hint: None,1
+                    width: "250"
+                    text: "Tema Oscuro"
+                Switch:
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint: 1, None
+                height: "100dp"
+                padding: "20dp","0dp"
+                Label:
+                    size_hint: None,1
+                    width: "250"
+                    text: "Temperatura máxima\n de advertencia"
+                BoxLayout:
+                    orientation: "horizontal"
+                    
+                    Slider:
+                        id: maxTempSlider
+                        min: 21
+                        max: 30
+                    Label: 
+                        text: str(int(maxTempSlider.value))+"ºC"
+                        size_hint: 0.1,1
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint: 1, None
+                height: "100dp"
+                padding: "20dp","0dp"
+                Label:
+                    size_hint: None,1
+                    width: "250"
+                    text: "Temperatura minima\n de advertencia"
+                BoxLayout:
+                    orientation: "horizontal"
+                    
+                    Slider:
+                        id: minTempSlider
+                        min: 10
+                        max: 19
+                    Label: 
+                        text: str(int(minTempSlider.value))+"ºC"
+                        size_hint: 0.1,1
+                
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint: 1, None
+                height: "100dp"  
+                Label:
+                    size_hint: None,1
+                    width: "250"
+                    text: "E-mail de envío"
+                BoxLayout:
+                    padding: "20dp"
+                    TextInput:
+                        background_color: menuButtonColorHighlight
+                        background_normal: ""
+                        multiline: False 
+                        size_hint: 1,None
+                        height: "50dp"
+                        foreground_color: textColorDark
+                        halign: "center"
+                        font_size: self.height*0.5
+                    
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint: 1, None
+                height: "100dp"
+                Label:
+                    size_hint: None,1
+                    width: "250"
+                    text: "No. Whatsaap\n de envío"
+                BoxLayout:
+                    padding: "20dp"
+                    TextInput:
+                        background_color: menuButtonColorHighlight
+                        background_normal: ""
+                        multiline: False 
+                        size_hint: 1,None
+                        height: "50dp"
+                        foreground_color: textColorDark
+                        halign: "center"
+                        font_size: self.height*0.5
+                        #border: 1,1,1,1
             Label:
-                Text: "configuration"
+                id: mensaje_guardado
+                size_hint: 1, None
+                height: "200dp"
+                text: ""
+            
+            Button:
+                size_hint: 1, None
+                height: "100dp"
+                text: "Guardar Cambios"
+                on_press:
+                    mensaje_guardado.text = "Cambios Guardados"
+                
