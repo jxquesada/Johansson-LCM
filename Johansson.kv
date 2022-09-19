@@ -17,6 +17,9 @@
 
 #<HomeWidget>:
 #    MainInfoBoxLayout:
+
+
+
 <HomeBoxLayout>
     orientation: "horizontal"
     canvas.before:
@@ -79,7 +82,7 @@
                     background_normal: ''
                     background_color: menuButtonColor
 
-                    on_press: root.usersButton_click()
+                    on_press: root.usersButton_click(current_menu_page)
                 Button:
                     text: "Configuracion"
                     color: 1, 1, 1, 1
@@ -87,7 +90,8 @@
                     background_normal: ''
                     background_color: menuButtonColor
 
-                    on_press: root.configurationButton_click()
+                    on_release: root.configurationButton_click(current_menu_page)
+                    
 
         Label:
             canvas.before:
@@ -112,19 +116,27 @@
             text: root.selectedButtonName
             size_hint: 1, 0.1
         
-        ScrollView:
-            RelativeLayout:
-                pos: self.pos
-                canvas.before:
-                    Color:
-                        rgba: backgoundColorDarkLv3
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size       
-                ConfigurationPageLayout:
-                    opacity: root.ConfigurationPageOpacity
-                UsersPageLayout:
-                    opacity: root.UsersPageOpacity
+        # ScrollView:
+        #     RelativeLayout:
+        #         pos: self.pos
+        #         canvas.before:
+        #             Color:
+        #                 rgba: backgoundColorDarkLv3
+        #             Rectangle:
+        #                 pos: self.pos
+        #                 size: self.size       
+        #         # ConfigurationPageLayout:
+        #         #     opacity: root.ConfigurationPageOpacity
+        #         # UsersPageLayout:
+        #         #     opacity: root.UsersPageOpacity
+        HomeMenuPageManager:
+            id: current_menu_page
+            ConfigurationPageLayout:
+                name: "ConfiurationPage"
+            UsersPageLayout:
+                name: "UsersPage"
+                    
+                    
             
 
 

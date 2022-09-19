@@ -1,3 +1,4 @@
 from kivy.uix.boxlayout import BoxLayout
-class UsersPageLayout(BoxLayout):
+from kivy.uix.screenmanager import ScreenManager, Screen
+class UsersPageLayout(Screen):
     pass

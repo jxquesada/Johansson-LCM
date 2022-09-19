@@ -1,19 +1,116 @@
 #:kivy 2.1.0
 #UsersPage:
 
-<UsersPageLayout>:
-    ScrollView:
-        StackLayout:
-            orientation: "lr-tb"
-            size_hint: 1, None
-            height: "500dp"
+#:set backgoundColorDarkLv1 0.15, 0.15, 0.15, 1
+#:set backgoundColorDarkLv2 0.125, 0.125, 0.125, 1
+#:set backgoundColorDarkLv3 0.1, 0.1, 0.1, 1
+#:set menuButtonColor       0.15, 0.15, 0.15, 1
+#:set menuButtonColorHighlight       0.17, 0.17, 0.17, 1
+#:set textColorDark         1, 1, 1, 1
+#:set lineColorDark         1, 1, 1, 1
 
-            Label:
+<UsersPageLayout>:
+    BoxLayout:
+        orientation: "vertical"
+        ScrollView:
+            StackLayout:
+                orientation: "lr-tb"
                 size_hint: 1, None
-                height: "100dp"
-                text: "Users"
-            Button:
-                size_hint: 1, None
-                height: "100dp"
-                text: "ok"
-                on_press: print("pressed")
+                height: self.minimum_height#"500dp"
+
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    Label:
+                        size_hint: 1,None
+                        height: "100dp"
+                        text: "Agregar Usuario Nuevo"
+                    
+                    BoxLayout: #definicion de campo de texto y etiqueta para Nombre de Usuario
+                        size_hint: 1, None
+                        height: "100dp"
+                        orientation: "horizontal"
+                        Label:
+                            size_hint: None,1
+                            width: "250dp"
+                            text: "Nombre Completo"
+                        BoxLayout:
+                            padding: "20dp","25dp"
+                            TextInput:
+                                id: new_user_fullname
+                                background_color: menuButtonColorHighlight
+                                background_normal: ""
+                                multiline: False 
+                                size_hint: 1,None
+                                height: "50dp"
+                                foreground_color: textColorDark
+                                halign: "center"
+                                font_size: self.height*0.35
+                                padding: 6,14,6,6
+
+                    BoxLayout:
+                        size_hint: 1, None
+                        height: "100dp"
+                        orientation: "horizontal"
+                        Label:
+                            size_hint: None,1
+                            width: "250dp"
+                            text: "Correo Electrónico"
+                        BoxLayout:
+                            padding: "20dp","25dp"
+                            TextInput:
+                                id: new_user_email
+                                background_color: menuButtonColorHighlight
+                                background_normal: ""
+                                multiline: False 
+                                size_hint: 1,None
+                                height: "50dp"
+                                foreground_color: textColorDark
+                                halign: "center"
+                                font_size: self.height*0.35
+                                padding: 6,14,6,6
+
+                    BoxLayout:
+                        size_hint: 1, None
+                        height: "100dp"
+                        orientation: "horizontal"
+                        Label:
+                            size_hint: None,1
+                            width: "250dp"
+                            text: "Número de Teléfono"
+                        BoxLayout:
+                            padding: "20dp","25dp"
+                            TextInput:
+                                id: new_user_phone_number
+                                background_color: menuButtonColorHighlight
+                                background_normal: ""
+                                multiline: False 
+                                size_hint: 1,None
+                                height: "50dp"
+                                foreground_color: textColorDark
+                                halign: "center"
+                                font_size: self.height*0.35
+                                padding: 6,14,6,6
+
+                
+
+
+                    BoxLayout:
+                        # padding: "20dp","0dp"
+                        orientation: "vertical"
+                        size_hint: 1, None
+                        # height: self.minimum_height
+                        Button:
+                            pos_hint: {"center_x": 0.5, "top": 1 }
+                            size_hint: None,None
+                            height: "50dp"
+                            width: "200dp"
+                            text: "Agregar Usuario"
+                            on_release: app.root.createUser(new_user_fullname.text, new_user_email.text, new_user_phone_number.text)
+                        
+
+                GridLayout:
+                    size_hint: 1, None
+                    height: self.minimum_height
+                    
