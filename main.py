@@ -4,6 +4,7 @@ from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
 from kivy.properties import StringProperty
 from kivy.properties import NumericProperty
+from kivy.properties import ColorProperty
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
@@ -11,14 +12,19 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.scrollview import ScrollView
+import backend as bef
+
 
 
 #Builder.load_file('Johansson.kv')
-Builder.load_file('UsersPage.kv')
 Builder.load_file('ConfigurationPage.kv')
+Builder.load_file('UsersPage.kv')
+Builder.load_file('CalibrationPage.kv')
+Builder.load_file('ResultsPage.kv')
+Builder.load_file('PatternsPage.kv')
 
 
-    
+print(round(0.12315,2))                                                                                                                                                         
 
 # class HomeWidget(BoxLayout):#BoxLayout Widget:
 #     """
@@ -31,57 +37,64 @@ class HomeMenuPageManager(ScreenManager):
 class HomeBoxLayout(BoxLayout):
     temperatureText = StringProperty("Temperatura")
     selectedButtonName = StringProperty("Home")
-    ConfigurationPageOpacity = NumericProperty(0)
-    UsersPageOpacity = NumericProperty(0)
+    # ConfigurationPageOpacity = NumericProperty(0)
+    # UsersPageOpacity = NumericProperty(0)
+    
+
+
 
     def configurationButton_click(self, ScreenManager):
         self.temperatureText = "Configuracion Selecionado"
         self.selectedButtonName = "Configuracion"
-        ScreenManager.current = "ConfiurationPage"
-        #self.changePageOpacity("Configuration")
+        ScreenManager.current = "ConfigurationPage"
+
 
     def usersButton_click(self, ScreenManager):
         self.temperatureText = "Usuarios Selecionado"
         self.selectedButtonName = "Usuarios"
         ScreenManager.current = "UsersPage"
-        #self.changePageOpacity("Users")
 
-    def blocksCalibrationButton_click(self):
+
+    def blocksCalibrationButton_click(self, ScreenManager):
         self.temperatureText = "Calibración de Bloques Selecionado"
         self.selectedButtonName = "Calibración de Bloques"
+        ScreenManager.current = "CalibrationPage"
 
-    def resultsButton_click(self):
+    def resultsButton_click(self, ScreenManager):
         self.temperatureText = "Resultados Selecionado"
         self.selectedButtonName = "Resultados"
+        ScreenManager.current = "ResultsPage"
         
-    def patternsButton_click(self):
+    def patternsButton_click(self, ScreenManager):
         self.temperatureText = "Patrones Selecionado"
         self.selectedButtonName = "Patrones"
+        ScreenManager.current = "PatternsPage"
     
     def createUser(self, new_user_fullname, new_user_email, new_user_phone_number):
         print("New User created with the following data:\n"+new_user_fullname+"\n"+new_user_email+"\n"+new_user_phone_number)
     
-    def changePageOpacity(self, targetPage):
-        """Pone la opacidad de la ventana actual en cero
-        y la objetivo la sube al maximo
-        opciones de target:
-            Users,
-            Configuration
-        """
-        self.turnOffAllPages()
-        match targetPage:
-            case "Users":
-                self.UsersPageOpacity=1
-            case "Configuration":
-                self.ConfigurationPageOpacity=1
+    # def changePageOpacity(self, targetPage):
+    #     """Pone la opacidad de la ventana actual en cero
+    #     y la objetivo la sube al maximo
+    #     opciones de target:
+    #         Users,
+    #         Configuration
+    #     """
+    #     self.turnOffAllPages()
+    #     match targetPage:
+    #         case "Users":
+    #             self.UsersPageOpacity=1
+    #         case "Configuration":
+    #             self.ConfigurationPageOpacity=1
 
     
-    def turnOffAllPages(self):
-        """Desactiva la opacidad de todas las ventanas del menú"""
-        self.ConfigurationPageOpacity=0
-        self.UsersPageOpacity=0
+    # def turnOffAllPages(self):
+    #     """Desactiva la opacidad de todas las ventanas del menú"""
+    #     self.ConfigurationPageOpacity=0
+    #     self.UsersPageOpacity=0
 
-
+    
+    
 # class UsersStackLayout(StackLayout):
 #     newButtonID = 0
 
@@ -91,28 +104,44 @@ class HomeBoxLayout(BoxLayout):
 #         self.newButtonID +=1
 # #########################
 #Funciones del Back-End
-def loadSettings():
-    Settings = {
-        "DarkTheme" : True
-    }
-    return Settings
+
 #########
 
 
 class JohanssonApp(App):
     """
     Clase principal de kivy,
-    Usada para inicializar la GUI principal
+    Usada para inicializar la GUI principal y contine 
+    los parametros y funciones globales de la app
     """
-    Settings = loadSettings()
+    Settings = bef.loadSettings()
+    backgoundColorDarkLv10 = ColorProperty((0.95, 0.95, 0.95, 1))
+    backgoundColorDarkLv20 = ColorProperty((0, 0, 0, 0.1))
+    backgoundColorDarkLv30 = ColorProperty((0.8, 0.8, 0.85, 0))
+    menuButtonColor        = ColorProperty((0.95, 0.95, 0.95, 1))
+    textboxColor           = ColorProperty((0, 0, 0, 0.1))
+    textColor              = ColorProperty((0, 0, 0, 1))
+    
+    def changeTheme(self, darkThemeSwitchState):
+        """"Esta funcion se encarga de realizar el cambio de Tema de color de la interfaz
+            cuando se interacciona con el Switch de encendido y apagado de tema oscuro
+            ubicado en configuraciones
+            On(True): Tema oscuro
+            Off(False): Tema claro
+        """
+        if darkThemeSwitchState:
+            print("darktheme\n")
+            self.Settings["DarkTheme"] = darkThemeSwitchState
+        else:
+            print("lighttheme\n")
+            self.Settings["DarkTheme"] = darkThemeSwitchState
+        pass
+    
+    def setColorTheme(self):
+        bef.setColorTheme(self.Settings)
+
 
     def build(self):
-        # if self.Settings["DarkTheme"]:
-        #     self.theme_cls.theme_style = "Dark"
-        # else: self.theme_cls.theme_style = "Light"
-
-        # self.theme_cls.primary_pallete = "LightBlue"
-        # self.theme_cls.accent_palette = "Blue"
         return HomeBoxLayout()
 
 if __name__=='__main__':

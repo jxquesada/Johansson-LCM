@@ -7,17 +7,24 @@
 #:set backgoundColorDarkLv3 0.1, 0.1, 0.1, 1
 #:set menuButtonColor       0.15, 0.15, 0.15, 1
 #:set menuButtonColorHighlight       0.17, 0.17, 0.17, 1
-#:set textColorDark         1, 1, 1, 1
-#:set lineColorDark         1, 1, 1, 1
+#:set textColorDark         0, 0, 0, 1
+#:set lineColorDark         0, 0, 2, 1
 
 
 <ConfigurationPageLayout>:
     BoxLayout:
         orientation: "vertical"
+        # canvas.before:
+        #     Color:
+        #         rgba: app.root.backgoundColorDarkLv20#
+        #     Rectangle:
+        #         pos: self.pos
+        #         size: self.size
         BoxLayout:
             orientation: "vertical"
             size_hint: 1,0.9
             ScrollView:
+            
                 StackLayout:
                     orientation: "lr-tb"
                     size_hint: 1, None
@@ -33,7 +40,13 @@
                             size_hint: None,1
                             width: "250dp"
                             text: "Tema Oscuro"
+                            color: app.textColor
                         Switch:
+                            size_hint: None,1
+                            pos_hint: { "x": 0 }
+                            width: "125dp"
+                            active: app.Settings["DarkTheme"]
+                            on_active: app.changeTheme(self.active)
 
                     BoxLayout:
                         orientation: "horizontal"
@@ -43,7 +56,8 @@
                         Label:
                             size_hint: None,1
                             width: "250dp"
-                            text: "Temperatura máxima\n de advertencia"
+                            text: "Temperatura máxima\n de notificación"
+                            color: app.textColor
                         BoxLayout:
                             orientation: "horizontal"
                             
@@ -51,9 +65,10 @@
                                 id: maxTempSlider
                                 min: 21
                                 max: 30
-                            Label: 
-                                text: str(int(maxTempSlider.value))+"ºC"
+                            Label:
+                                text: str(round(maxTempSlider.value,1))+"ºC"
                                 size_hint: 0.1,1
+                                color: app.textColor
 
                     BoxLayout:
                         orientation: "horizontal"
@@ -63,7 +78,8 @@
                         Label:
                             size_hint: None,1
                             width: "250dp"
-                            text: "Temperatura minima\n de advertencia"
+                            text: "Temperatura minima\n de notificación"
+                            color: app.textColor
                         BoxLayout:
                             orientation: "horizontal"
                             
@@ -71,9 +87,10 @@
                                 id: minTempSlider
                                 min: 10
                                 max: 19
-                            Label: 
-                                text: str(int(minTempSlider.value))+"ºC"
+                            Label:
+                                text: str(round(minTempSlider.value,1))+"ºC"
                                 size_hint: 0.1,1
+                                color: app.textColor
                         
                     BoxLayout:
                         orientation: "horizontal"
@@ -83,15 +100,16 @@
                             size_hint: None,1
                             width: "250dp"
                             text: "E-mail de envío"
+                            color: app.textColor
                         BoxLayout:
                             padding: "20dp","25dp"
                             TextInput:
-                                background_color: menuButtonColorHighlight
+                                background_color: app.textboxColor
                                 background_normal: ""
                                 multiline: False 
                                 size_hint: 1,None
                                 height: "50dp"
-                                foreground_color: textColorDark
+                                foreground_color: app.textColor
                                 halign: "center"
                                 font_size: self.height*0.35
                                 padding: 6,14,6,6
@@ -105,15 +123,16 @@
                             size_hint: None,1
                             width: "250dp"
                             text: "No. Whatsaap\n de envío"
+                            color: app.textColor
                         BoxLayout:
                             padding: "20dp","25dp"
                             TextInput:
-                                background_color: menuButtonColorHighlight
+                                background_color: app.textboxColor
                                 background_normal: ""
                                 multiline: False 
                                 size_hint: 1,None
                                 height: "50dp"
-                                foreground_color: textColorDark
+                                foreground_color: app.textColor
                                 halign: "center"
                                 padding: 6,14,6,6
                                 
@@ -124,6 +143,7 @@
                         size_hint: 1, None
                         height: "200dp"
                         text: ""
+                        color: app.textColor
         BoxLayout:
             size_hint: 1,0.1           
             Button:

@@ -26,6 +26,7 @@
                         size_hint: 1,None
                         height: "100dp"
                         text: "Agregar Usuario Nuevo"
+                        color: app.textColor
                     
                     BoxLayout: #definicion de campo de texto y etiqueta para Nombre de Usuario
                         size_hint: 1, None
@@ -35,16 +36,17 @@
                             size_hint: None,1
                             width: "250dp"
                             text: "Nombre Completo"
+                            color: app.textColor
                         BoxLayout:
                             padding: "20dp","25dp"
                             TextInput:
                                 id: new_user_fullname
-                                background_color: menuButtonColorHighlight
+                                background_color: app.textboxColor
                                 background_normal: ""
                                 multiline: False 
                                 size_hint: 1,None
                                 height: "50dp"
-                                foreground_color: textColorDark
+                                foreground_color: app.textColor
                                 halign: "center"
                                 font_size: self.height*0.35
                                 padding: 6,14,6,6
@@ -57,16 +59,17 @@
                             size_hint: None,1
                             width: "250dp"
                             text: "Correo Electrónico"
+                            color: app.textColor
                         BoxLayout:
                             padding: "20dp","25dp"
                             TextInput:
                                 id: new_user_email
-                                background_color: menuButtonColorHighlight
+                                background_color: app.textboxColor
                                 background_normal: ""
                                 multiline: False 
                                 size_hint: 1,None
                                 height: "50dp"
-                                foreground_color: textColorDark
+                                foreground_color: app.textColor
                                 halign: "center"
                                 font_size: self.height*0.35
                                 padding: 6,14,6,6
@@ -79,16 +82,17 @@
                             size_hint: None,1
                             width: "250dp"
                             text: "Número de Teléfono"
+                            color: app.textColor
                         BoxLayout:
                             padding: "20dp","25dp"
                             TextInput:
                                 id: new_user_phone_number
-                                background_color: menuButtonColorHighlight
+                                background_color: app.textboxColor
                                 background_normal: ""
                                 multiline: False 
                                 size_hint: 1,None
                                 height: "50dp"
-                                foreground_color: textColorDark
+                                foreground_color: app.textColor
                                 halign: "center"
                                 font_size: self.height*0.35
                                 padding: 6,14,6,6

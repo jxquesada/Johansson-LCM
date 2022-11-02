@@ -1,0 +1,214 @@
+#:kivy 2.1.0
+#UsersPage:
+#:set backgoundColorDarkLv1 0.15, 0.15, 0.15, 1
+#:set backgoundColorDarkLv2 0.125, 0.125, 0.125, 1
+#:set backgoundColorDarkLv3 0.1, 0.1, 0.1, 1
+#:set menuButtonColor       0.15, 0.15, 0.15, 1
+#:set menuButtonColorHighlight       0.17, 0.17, 0.17, 1
+#:set textColorDark         1, 1, 1, 1
+#:set lineColorDark         1, 1, 1, 1
+
+<CalibrationPageLayout>:
+    BoxLayout:
+        orientation: "vertical"
+        # canvas.before:
+        #     Color:
+        #         rgba: app.root.backgoundColorDarkLv20#
+        #     Rectangle:
+        #         pos: self.pos
+        #         size: self.size
+        
+        ScrollView:
+            StackLayout:
+                orientation: "lr-tb"
+                size_hint: 1, None
+                height: self.minimum_height#"500dp"
+
+                #Campos para Numero de certificado
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint: 1, None
+                    height: "100dp"  
+                    Label:
+                        size_hint: None,1
+                        width: "250dp"
+                        text: "Número de Certificado"
+                        color: app.textColor
+                    BoxLayout:
+                        padding: "20dp","25dp"
+                        TextInput:
+                            background_color: app.textboxColor
+                            background_normal: ""
+                            multiline: False 
+                            size_hint: 1,None
+                            height: "50dp"
+                            foreground_color: app.textColor
+                            halign: "center"
+                            font_size: self.height*0.35
+                            padding: 6,14,6,6
+
+                #Campos para Solicitante
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint: 1, None
+                    height: "100dp"  
+                    Label:
+                        size_hint: None,1
+                        width: "250dp"
+                        text: "Solicitante"
+                        color: app.textColor
+                    BoxLayout:
+                        padding: "20dp","25dp"
+                        TextInput:
+                            background_color: app.textboxColor
+                            background_normal: ""
+                            multiline: False 
+                            size_hint: 1,None
+                            height: "50dp"
+                            foreground_color: app.textColor
+                            halign: "center"
+                            font_size: self.height*0.35
+                            padding: 6,14,6,6
+
+                #Campos parafolios de la bitacora
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint: 1, None
+                    height: "100dp"  
+                    Label:
+                        size_hint: None,1
+                        width: "250dp"
+                        text: "Folios de bitacora utilizada de"
+                        color: app.textColor
+
+                    BoxLayout:
+                        padding: "20dp","25dp"
+                        TextInput:
+                            background_color: app.textboxColor
+                            background_normal: ""
+                            multiline: False 
+                            size_hint: 1,None
+                            height: "50dp"
+                            foreground_color: app.textColor
+                            halign: "center"
+                            font_size: self.height*0.35
+                            padding: 6,14,6,6
+                        
+                        Label:
+                            size_hint: None,1
+                            width: "15dp"
+                            text: "a"
+                            color: app.textColor
+
+                        TextInput:
+                            background_color: app.textboxColor
+                            background_normal: ""
+                            multiline: False 
+                            size_hint: 1,None
+                            height: "50dp"
+                            foreground_color: app.textColor
+                            halign: "center"
+                            font_size: self.height*0.35
+                            padding: 6,14,6,6
+                
+                #Campos para 
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint: 1, None
+                    height: "100dp"  
+                    Label:
+                        size_hint: None,1
+                        width: "250dp"
+                        text: "Solicitante"
+                        color: app.textColor
+                    BoxLayout:
+                        padding: "20dp","25dp"
+                        TextInput:
+                            background_color: app.textboxColor
+                            background_normal: ""
+                            multiline: False 
+                            size_hint: 1,None
+                            height: "50dp"
+                            foreground_color: app.textColor
+                            halign: "center"
+                            font_size: self.height*0.35
+                            padding: 6,14,6,6
+                
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint: 1, None
+                    height: "100dp"  
+                    Label:
+                        size_hint: None,1
+                        width: "250dp"
+                        text: "Solicitante"
+                        color: app.textColor
+                    BoxLayout:
+                        padding: "20dp","25dp"
+                        TextInput:
+                            background_color: app.textboxColor
+                            background_normal: ""
+                            multiline: False 
+                            size_hint: 1,None
+                            height: "50dp"
+                            foreground_color: app.textColor
+                            halign: "center"
+                            font_size: self.height*0.35
+                            padding: 6,14,6,6
+
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint: 1, None
+                    height: "100dp"  
+                    Label:
+                        size_hint: None,1
+                        width: "250dp"
+                        text: "Opciones"
+                        color: app.textColor
+                    BoxLayout:
+                        padding: "20dp","25dp"
+
+                        BoxLayout:
+                            padding: "0dp","0dp","10dp","0dp"
+                            Label:
+                                size_hint: None,1
+                                width: "25dp"
+                                text: "1"
+                                color: app.textColor
+                            CheckBox:
+                                size_hint: None,1
+                                group: "Opciones"
+                                pos_hint: { "x": 0 }
+                                width: "25dp"
+                                background_radio_normal: "icons/radioButton.png"
+                                padding: "0dp","0dp","50dp","0dp"
+
+                        BoxLayout:
+                            padding: "0dp","0dp","10dp","0dp"   
+                            Label:
+                                size_hint: None,1
+                                width: "25dp"
+                                text: "2"
+                                color: app.textColor
+                            CheckBox:
+                                size_hint: None,1
+                                group: "Opciones"
+                                pos_hint: { "center": -1 }
+                                width: "25dp"
+                                background_radio_normal: "icons/radioButton.png"
+                                padding: "0dp","0dp","500dp","0dp"
+
+                        BoxLayout:
+                            padding: "0dp","0dp","10dp","0dp"
+                            Label:
+                                size_hint: None,1
+                                width: "25dp"
+                                text: "3"
+                                color: app.textColor
+                            CheckBox:
+                                size_hint: None,1
+                                group: "Opciones"
+                                pos_hint: { "center": -1 }
+                                width: "25dp"
+                                background_radio_normal: "icons/radioButton.png"
+                               

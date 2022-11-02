@@ -1,0 +1,19 @@
+#:kivy 2.1.0
+#UsersPage:
+
+#:set backgoundColorDarkLv1 0.15, 0.15, 0.15, 1
+#:set backgoundColorDarkLv2 0.125, 0.125, 0.125, 1
+#:set backgoundColorDarkLv3 0.1, 0.1, 0.1, 1
+#:set menuButtonColor       0.15, 0.15, 0.15, 1
+#:set menuButtonColorHighlight       0.17, 0.17, 0.17, 1
+#:set textColorDark         1, 1, 1, 1
+#:set lineColorDark         1, 1, 1, 1
+
+<ResultsPage>:
+    BoxLayout:
+        orientation: "vertical"
+        ScrollView:
+            StackLayout:
+                orientation: "lr-tb"
+                size_hint: 1, None
+                height: self.minimum_height#"500dp"

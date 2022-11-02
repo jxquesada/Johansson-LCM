@@ -20,13 +20,16 @@ window.title("Calibración de bloques")          #Nombre de la ventana
 window.resizable(0,0)                           #No permite cambiar dimensiones de la venta
                                    
 window.geometry("1600x900")                     #Tamaño de la ventana
-
+global motorEnabledState
+global motorDisabledState 
+motorEnabledState = GPIO.HIGH
+motorDisabledState = GPIO.LOW
 ################## Setear posición del disco giratorio ##################
 def gohome():
     #sleep(1)
-    GPIO.output(EN_pin, GPIO.LOW)       #Enable debe estar en LOW para accionar motores
+    GPIO.output(pin_enablePlateMotor, motorEnabledState)       #Enable debe estar en High para accionar motores si tiene el NOT en la salida
     GPIO.output(sleepMot3, GPIO.HIGH)       #Sleep debe estar en HIGH para funcionar
-    sensorOut=GPIO.input(slotted_pin)
+    sensorOut=GPIO.input(pin_startRotationLimitSensor)
     print("Estado del sensor infrarrojo", sensorOut)
     sleep(5)
     steps=0                         #Define el contador de steps en 0
@@ -34,7 +37,7 @@ def gohome():
     
     while sensorOut ==0:
         #print("Moviéndose y monitoreando el sensor infrarrojo")
-        sensorOut=GPIO.input(slotted_pin)
+        sensorOut=GPIO.input(pin_startRotationLimitSensor)
                                     #Cuando no esté en home avance
         motor3.motor_go(True,       #Clockwise
                         "Full",     #Tipo de step
@@ -60,9 +63,9 @@ def gohome():
                         .05)        #Delay inicial (s)
     #global posicionStep
     posicionStep=0                  #Defino la posición home como angulo 0
-    GPIO.output(sleepMot3, GPIO.LOW)       #Sleep debe estar en LOW para deshabilitarse
+    #GPIO.output(sleepMot3, GPIO.LOW)       #Sleep debe estar en LOW para deshabilitarse
     print("Estoy en casa")
-    GPIO.output(EN_pin, GPIO.HIGH)       #Inhabilita los motores
+    GPIO.output(pin_enablePlateMotor, motorDisabledState)       #Inhabilita los motores
     return posicionStep
 ################## Configuración de entradas/salidas ##################
 
@@ -74,28 +77,37 @@ GPIO_pins2 = (5, 6, 13)             #pines de modo para el motor2
 direction2 = 20                     #pin de dirección para el motor2
 step2 = 21                          #pin de step para el motor2
 
-EN_pin = 24                         #pin de enable
+pin_enableCalibrationMotor = 24                         #pin de enable
 
 GPIO_pins3 = (14, 15, 18)           #Pines de modo de paso
 direction3 = 19                     #Pin de sentido de giro
 step3 = 16                          #Pin de dar paso
+pin_enablePlateMotor = 23
+
 sleepMot3=12                        #Pin para controlar el sleep del motor de ordenamiento
                                     #Si está en 1 está activo, en 0 está en sleep
+pin_startRotationLimitSensor = 4               #Pin para el sensor infrarrojo de rotacion de angulo nicial
+pin_endRotationLimitSensor = 3                 #Pin para el sensor infrarrojo de rotacion de angulo final
 
 motor3 = RpiMotorLib.A4988Nema(direction3, step3, GPIO_pins3, "A4988") #Parámetros del motor
 
 mymotortest1 = RpiMotorLib.A4988Nema(direction1, step1, GPIO_pins1, "A4988") #Parámetros del motor1
 mymotortest2 = RpiMotorLib.A4988Nema(direction2, step2, GPIO_pins2, "A4988") #Parámetros del motor2
 
-GPIO.setup(EN_pin, GPIO.OUT)                                                                                                                                                
-GPIO.output(EN_pin, GPIO.HIGH)       #Modo seguro, motores inhabilitados
+GPIO.setup(pin_enableCalibrationMotor, GPIO.OUT)     
+                                                                                                                                           
+GPIO.output(pin_enableCalibrationMotor, motorDisabledState)       #Modo seguro, motores inhabilitados
+
+GPIO.setup(pin_enablePlateMotor, GPIO.OUT)     
+                                                                                                                                           
+GPIO.output(pin_enablePlateMotor, motorDisabledState)       #Modo seguro, motores de plato inhabilitados
 
 GPIO.setup(sleepMot3, GPIO.OUT)                                                                                                                                                
 GPIO.output(sleepMot3, GPIO.LOW)       #Sleep debe estar en LOW para deshabilitarse
 
-slotted_pin = 4                     #Pin para el sensor infrarrojo
+
 GPIO.setmode(GPIO.BCM)              #Numeración Broadcom
-GPIO.setup(slotted_pin, GPIO.IN)    #Se define como entrada el sensor
+GPIO.setup(pin_startRotationLimitSensor, GPIO.IN)    #Se define como entrada el sensor
 
 posicionStep=0                      #Variable de posición angular del disco
 required=0                          #Variable de pasos requeridos par llegar
@@ -253,7 +265,7 @@ def gire(posicionSteps, desired): #NUEVO
         listo=0
         
         GPIO.output(sleepMot3, GPIO.HIGH)       #Sleep debe estar en HIGH para habilitarse
-        GPIO.output(EN_pin, GPIO.LOW)       #habilita los motores
+        GPIO.output(pin_enablePlateMotor, motorEnabledState)       #habilita los motores
         
         if desired > posicionSteps:  #Si debe moverse en sentido horario
             required=desired-posicionSteps
@@ -309,7 +321,7 @@ def gire(posicionSteps, desired): #NUEVO
                                     #de los casos anteriores no se mueva
             
         GPIO.output(sleepMot3, GPIO.LOW)       #Sleep debe estar en LOW para deshabilitarse
-        GPIO.output(EN_pin, GPIO.HIGH)       #Inhabilita los motores
+        GPIO.output(pin_enablePlateMotor, motorDisabledState)       #Inhabilita los motores
         
         print("Nueva posicion del disco",posicionStep)
         return posicionStep, listo
@@ -1095,7 +1107,7 @@ def ActivaPedal(servo_pin):
     myservotest.servo_move(servo_pin, 7.5, .5, False, .01)     #Movimiento a posición 7.5
 
 def Completa1(tiempoinicial, tiempoestabilizacion, Repeticiones):
-    GPIO.output(EN_pin, GPIO.LOW)       #habilita los motores
+    GPIO.output(pin_enableCalibrationMotor, motorEnabledState)       #habilita los motores
     
     global valorNominalBloque
     global dato
@@ -1187,14 +1199,14 @@ def Completa1(tiempoinicial, tiempoestabilizacion, Repeticiones):
     tiempoCorrida=toc-tic                            #retorna el tiempo de corrida en segundos
     global t0
     t0=time.time()                                   #inicia el conteo de espera de bloques
-    GPIO.output(EN_pin, GPIO.HIGH)       #Inhabilita los motores
+    GPIO.output(pin_enableCalibrationMotor, motorDisabledState)       #Inhabilita los motores
     return listaMediciones, tiempoCorrida, t0
     
 
 ################## Secuencia completa - Plantilla2 ##################
 
 def Completa2(tiempoinicial, tiempoestabilizacion, Repeticiones):
-    GPIO.output(EN_pin, GPIO.LOW)       #habilita los motores
+    GPIO.output(pin_enableCalibrationMotor, motorEnabledState)       #habilita los motores
     
     global valorNominalBloque
     global dato
@@ -1288,13 +1300,13 @@ def Completa2(tiempoinicial, tiempoestabilizacion, Repeticiones):
     tiempoCorrida=toc-tic                                   #retorna el tiempo de corrida en segundos
     global t0
     t0=time.time()                                   #inicia el conteo de espera de bloques
-    GPIO.output(EN_pin, GPIO.HIGH)       #Inhabilita los motores
+    GPIO.output(pin_enableCalibrationMotor, motorDisabledState)       #Inhabilita los motores
     return listaMediciones, tiempoCorrida, t0
 
 ################## Secuencia centros ##################
 
 def Centros(tiempoinicial, tiempoestabilizacion, Repeticiones):
-    GPIO.output(EN_pin, GPIO.LOW)       #habilita los motores
+    GPIO.output(pin_enableCalibrationMotor, motorEnabledState)       #habilita los motores
     
     global valorNominalBloque
     global dato
@@ -1349,7 +1361,7 @@ def Centros(tiempoinicial, tiempoestabilizacion, Repeticiones):
     tiempoCorrida=toc-tic                                   #retorna el tiempo de corrida en segundos
     global t0
     t0=time.time()                                   #inicia el conteo de espera de bloques
-    GPIO.output(EN_pin, GPIO.HIGH)       #Inhabilita los motores
+    GPIO.output(pin_enableCalibrationMotor, motorDisabledState)       #Inhabilita los motores
     return listaMediciones, tiempoCorrida, t0
 
 ################## Frame Información de servicio ##################

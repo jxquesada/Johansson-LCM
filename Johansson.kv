@@ -3,13 +3,16 @@
 # Canvas2:
 #:import ConfigurationPageLayout ConfigurationPage
 #:import UsersPageLayout UsersPage
+#:import CalibrationPageLayout CalibrationPage
+#:import ResultsPageLayout ResultsPage
+#:import PatternsPageLayout PatternsPage
 
 #Costantes generales
 
 #:set backgoundColorDarkLv1 0.15, 0.15, 0.15, 1
 #:set backgoundColorDarkLv2 0.125, 0.125, 0.125, 1
 #:set backgoundColorDarkLv3 0.1, 0.1, 0.1, 1
-#:set menuButtonColor       0.15, 0.15, 0.15, 1
+##:set menuButtonColor       0.15, 0.15, 0.15, 1
 #:set menuButtonColorHighlight       0.17, 0.17, 0.17, 1
 #:set textColorDark         1, 1, 1, 1
 #:set lineColorDark         1, 1, 1, 1
@@ -24,15 +27,17 @@
     orientation: "horizontal"
     canvas.before:
         Color:
-            rgba: backgoundColorDarkLv1#
+            rgba: app.backgoundColorDarkLv10#
         Rectangle:
             pos: self.pos
             size: self.size
+
     canvas.after:
         Color:
-            rgba:lineColorDark
+            rgba:app.textColor
         Line:
             points: (10,self.height*0.6,240,self.height*0.6)
+
     BoxLayout:
         orientation: "vertical"
         size_hint: None, 1
@@ -41,11 +46,12 @@
             padding: "20dp"
             size_hint: 1,0.5
             Image:
-                source: "icons/LCM_logo_black.png"
+                source: "icons/LCM_logo.png"
                 
         Label:
             text: root.temperatureText
             size_hint: 1, 0.5
+            color: app.textColor
             #background_color: backgoundColorDarkLv1
         
         ScrollView:
@@ -59,36 +65,42 @@
                 Button:
                     text: "Calibrar Bloques"
                     background_normal: ''
-                    background_color: menuButtonColor
+                    color: app.textColor
+                    background_color: app.menuButtonColor
 
-                    on_press: root.blocksCalibrationButton_click()
+                    on_press: root.blocksCalibrationButton_click(current_menu_page)
                     
                 Button:
                     text: "Resultados"
                     size_hint: 1, 1
                     background_normal: ''
-                    background_color: menuButtonColor
+                    color: app.textColor
+                    background_color: app.menuButtonColor
 
-                    on_press: root.resultsButton_click()
+                    on_press: root.resultsButton_click(current_menu_page)
 
                 Button:
                     text: "Patrones"
                     background_normal: ''
-                    background_color: menuButtonColor
+                    color: app.textColor
+                    background_color: app.menuButtonColor
 
-                    on_press: root.patternsButton_click()
+                    on_press: root.patternsButton_click(current_menu_page)
                 Button:
                     text: "Usuarios"
                     background_normal: ''
-                    background_color: menuButtonColor
+                    color: app.textColor
+                    background_color: app.menuButtonColor
 
                     on_press: root.usersButton_click(current_menu_page)
+                    on_press: print("hello")
                 Button:
                     text: "Configuracion"
                     color: 1, 1, 1, 1
                     size_hint: 1, 1
                     background_normal: ''
-                    background_color: menuButtonColor
+                    color: app.textColor
+                    background_color: app.menuButtonColor
 
                     on_release: root.configurationButton_click(current_menu_page)
                     
@@ -96,25 +108,34 @@
         Label:
             canvas.before:
                 Color:
-                    rgba: backgoundColorDarkLv2#
+                    rgba: app.backgoundColorDarkLv10#
                 Rectangle:
                     pos: self.pos
                     size: self.size
             size_hint: 1, 0.3
+            color: app.textColor
             text: "Comparador de Bloques\n                LCM\n         Version "+Version 
     
     BoxLayout:
         orientation: "vertical"
-        canvas.before:
-            Color:
-                rgba: backgoundColorDarkLv2#
-            Rectangle:
-                pos: self.pos
-                size: self.size
+        # canvas.before:
+        #     Color:
+        #         rgba: root.backgoundColorDarkLv30#
+        #     Rectangle:
+        #         pos: self.pos
+        #         size: self.size
         Label:
             #id: selectedSection_title
             text: root.selectedButtonName
             size_hint: 1, 0.1
+            color: app.textColor
+            canvas.before:
+                Color:
+                    rgba: app.backgoundColorDarkLv20#
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            
         
         # ScrollView:
         #     RelativeLayout:
@@ -131,11 +152,17 @@
         #         #     opacity: root.UsersPageOpacity
         HomeMenuPageManager:
             id: current_menu_page
-            ConfigurationPageLayout:
-                name: "ConfiurationPage"
             UsersPageLayout:
                 name: "UsersPage"
-                    
+            ConfigurationPageLayout:
+                name: "ConfigurationPage"
+            CalibrationPageLayout:
+                name: "CalibrationPage"
+            ResultsPageLayout:
+                name: "ResultsPage"
+            PatternsPageLayout:
+                name: "PatternsPage"
+ 
                     
             
 
