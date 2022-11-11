@@ -39,7 +39,7 @@ def gohome():
         #print("Moviéndose y monitoreando el sensor infrarrojo")
         sensorOut=GPIO.input(pin_startRotationLimitSensor)
                                     #Cuando no esté en home avance
-        motor3.motor_go(True,       #Clockwise
+        steperMotorPlate.motor_go(True,       #Clockwise
                         "Full",     #Tipo de step
                         1,          #Cantidad de steps
                         .005,         #Delay del step (s)
@@ -55,7 +55,7 @@ def gohome():
     print("Cantidad de pasos de ajuste a home: ", devolverse)
     sleep(5)
     for count in range(devolverse):
-        motor3.motor_go(False,       #Clockwise
+        steperMotorPlate.motor_go(False,       #Clockwise
                         "Full",     #Tipo de step
                         1,          #Cantidad de steps
                         .005,         #Delay del step (s)
@@ -89,10 +89,10 @@ sleepMot3=12                        #Pin para controlar el sleep del motor de or
 pin_startRotationLimitSensor = 4               #Pin para el sensor infrarrojo de rotacion de angulo nicial
 pin_endRotationLimitSensor = 3                 #Pin para el sensor infrarrojo de rotacion de angulo final
 
-motor3 = RpiMotorLib.A4988Nema(direction3, step3, GPIO_pins3, "A4988") #Parámetros del motor
+steperMotorPlate = RpiMotorLib.A4988Nema(direction3, step3, GPIO_pins3, "A4988") #Parámetros del motor
 
-mymotortest1 = RpiMotorLib.A4988Nema(direction1, step1, GPIO_pins1, "A4988") #Parámetros del motor1
-mymotortest2 = RpiMotorLib.A4988Nema(direction2, step2, GPIO_pins2, "A4988") #Parámetros del motor2
+steperMotor1 = RpiMotorLib.A4988Nema(direction1, step1, GPIO_pins1, "A4988") #Parámetros del motor1
+steperMotor2 = RpiMotorLib.A4988Nema(direction2, step2, GPIO_pins2, "A4988") #Parámetros del motor2
 
 GPIO.setup(pin_enableCalibrationMotor, GPIO.OUT)     
                                                                                                                                            
@@ -276,7 +276,7 @@ def gire(posicionSteps, desired): #NUEVO
             avanzar=required-compensar
             
             for a in range(avanzar):
-                motor3.motor_go(True,   #Clockwise
+                steperMotorPlate.motor_go(True,   #Clockwise
                             "Full",     #Tipo de step
                             1,          #Cantidad de steps
                             .005,         #Delay del step (s)
@@ -297,7 +297,7 @@ def gire(posicionSteps, desired): #NUEVO
             avanzar=required-compensar
             
             for a in range(avanzar):                       
-                motor3.motor_go(False,  #Counter Clockwise
+                steperMotorPlate.motor_go(False,  #Counter Clockwise
                             "Full",     #Tipo de step
                             1,          #Cantidad de steps
                             .005,         #Delay del step (s)
@@ -1130,7 +1130,7 @@ def Completa1(tiempoinicial, tiempoestabilizacion, Repeticiones):
         listaMediciones.append(MedicionBloque) #Valor del patrón en posición 1 (centro)
         print(MedicionBloque)
 
-        mymotortest1.motor_go(True, "Half", 417, .005, False, 2) #Mov de 1 a 2
+        steperMotor1.motor_go(True, "Half", 417, .005, False, 2) #Mov de 1 a 2
 
         ActivaPedal(servo_pin) #Baja palpador
         sleep(int(tiempoestabilizacion)) #Tiempo de estabilización
@@ -1139,9 +1139,9 @@ def Completa1(tiempoinicial, tiempoestabilizacion, Repeticiones):
         listaMediciones.append(MedicionBloque)  #Valor del calibrando en posición 2 (esquina)
         print(MedicionBloque)
 
-        mymotortest1.motor_go(False, "Half", 96, .005, False, 2) #Mov1 de 2 a 3
-        mymotortest2.motor_go(False, "Full", 398, .005, False, 1) #Mov2 de 2 a 3
-        mymotortest1.motor_go(True, "Half", 178, .005, False, 1) #Mov3 de 2 a 3
+        steperMotor1.motor_go(False, "Half", 96, .005, False, 2) #Mov1 de 2 a 3
+        steperMotor2.motor_go(False, "Full", 398, .005, False, 1) #Mov2 de 2 a 3
+        steperMotor1.motor_go(True, "Half", 178, .005, False, 1) #Mov3 de 2 a 3
 
         ActivaPedal(servo_pin) #Baja palpador
         sleep(int(tiempoestabilizacion)) #Tiempo de estabilización
@@ -1150,7 +1150,7 @@ def Completa1(tiempoinicial, tiempoestabilizacion, Repeticiones):
         listaMediciones.append(MedicionBloque) #Valor del calibrando en posición 3 (esquina)
         print(MedicionBloque)
             
-        mymotortest1.motor_go(False, "Half", 178, .005, False, 2) #Mov de 3 a 4
+        steperMotor1.motor_go(False, "Half", 178, .005, False, 2) #Mov de 3 a 4
 
         ActivaPedal(servo_pin) #Baja palpador
         sleep(int(tiempoestabilizacion)) #Tiempo de estabilización
@@ -1159,7 +1159,7 @@ def Completa1(tiempoinicial, tiempoestabilizacion, Repeticiones):
         listaMediciones.append(MedicionBloque)  #Valor del calibrando en posición 4 (esquina)
         print(MedicionBloque)
 
-        mymotortest2.motor_go(True, "Full", 796, .005, False, 2) #Mov de 4 a 5
+        steperMotor2.motor_go(True, "Full", 796, .005, False, 2) #Mov de 4 a 5
 
         ActivaPedal(servo_pin) #Baja palpador
         sleep(int(tiempoestabilizacion)) #Tiempo de estabilización
@@ -1168,7 +1168,7 @@ def Completa1(tiempoinicial, tiempoestabilizacion, Repeticiones):
         listaMediciones.append(MedicionBloque)  #Valor del calibrando en posición 5 (esquina)
         print(MedicionBloque)
 
-        mymotortest1.motor_go(True, "Half", 174, .005, False, 2) #Mov de 5 a 6
+        steperMotor1.motor_go(True, "Half", 174, .005, False, 2) #Mov de 5 a 6
 
         ActivaPedal(servo_pin) #Baja palpador
         sleep(int(tiempoestabilizacion)) #Tiempo de estabilización
@@ -1177,9 +1177,9 @@ def Completa1(tiempoinicial, tiempoestabilizacion, Repeticiones):
         listaMediciones.append(MedicionBloque)  #Valor del calibrando en posición 6 (esquina)
         print(MedicionBloque)
 
-        mymotortest1.motor_go(False, "Half", 174, .005, False, 2) #Mov de 6 a 5
-        mymotortest2.motor_go(False, "Full", 398, .005, False, 1) #Mov de 5 a Esp2
-        mymotortest1.motor_go(False, "Half", 330, .005, False, 1) #Mov de Esp2 a 1
+        steperMotor1.motor_go(False, "Half", 174, .005, False, 2) #Mov de 6 a 5
+        steperMotor2.motor_go(False, "Full", 398, .005, False, 1) #Mov de 5 a Esp2
+        steperMotor1.motor_go(False, "Half", 330, .005, False, 1) #Mov de Esp2 a 1
 
         ActivaPedal(servo_pin) #Baja palpador
         sleep(int(tiempoestabilizacion)) #Tiempo de estabilización
@@ -1188,7 +1188,7 @@ def Completa1(tiempoinicial, tiempoestabilizacion, Repeticiones):
         listaMediciones.append(MedicionBloque)  #Valor del patrón en posición 1 (centro)
         print(MedicionBloque)
 
-    mymotortest1.motor_go(True, "Half", 208, .005, False, 2) #Mov de 1 a HOME
+    steperMotor1.motor_go(True, "Half", 208, .005, False, 2) #Mov de 1 a HOME
 
     ActivaPedal(servo_pin) #Baja palpador
     
@@ -1230,7 +1230,7 @@ def Completa2(tiempoinicial, tiempoestabilizacion, Repeticiones):
         print(MedicionBloque)
         listaMediciones.append(MedicionBloque)              #Valor del patrón en posición 1 (centro)
 
-        mymotortest1.motor_go(True, "Half", 416, .005, False, 2) #Mov de 1 a 2
+        steperMotor1.motor_go(True, "Half", 416, .005, False, 2) #Mov de 1 a 2
 
         ActivaPedal(servo_pin)                              #Baja palpador
         sleep(int(tiempoestabilizacion))                    #Tiempo de estabilización
@@ -1239,9 +1239,9 @@ def Completa2(tiempoinicial, tiempoestabilizacion, Repeticiones):
         print(MedicionBloque)
         listaMediciones.append(MedicionBloque)              #Valor del calibrando en posición 2 (esquina)
         
-        mymotortest1.motor_go(False, "Half", 96, .005, False, 2)    #Mov1 de 2 a 3
-        mymotortest2.motor_go(False, "Full", 337, .005, False, 1)   #Mov2 de 2 a 3
-        mymotortest1.motor_go(True, "Half", 182, .005, False, 1)    #Mov3 de 2 a 3
+        steperMotor1.motor_go(False, "Half", 96, .005, False, 2)    #Mov1 de 2 a 3
+        steperMotor2.motor_go(False, "Full", 337, .005, False, 1)   #Mov2 de 2 a 3
+        steperMotor1.motor_go(True, "Half", 182, .005, False, 1)    #Mov3 de 2 a 3
 
         ActivaPedal(servo_pin)                              #Baja palpador
         sleep(int(tiempoestabilizacion))                    #Tiempo de estabilización
@@ -1250,7 +1250,7 @@ def Completa2(tiempoinicial, tiempoestabilizacion, Repeticiones):
         print(MedicionBloque)
         listaMediciones.append(MedicionBloque)              #Valor del calibrando en posición 3 (esquina)
         
-        mymotortest1.motor_go(False, "Half", 183, .005, False, 2)
+        steperMotor1.motor_go(False, "Half", 183, .005, False, 2)
                                                             #Mov de 3 a 4
 
         ActivaPedal(servo_pin)                              #Baja palpador
@@ -1260,7 +1260,7 @@ def Completa2(tiempoinicial, tiempoestabilizacion, Repeticiones):
         print(MedicionBloque)
         listaMediciones.append(MedicionBloque)              #Valor del calibrando en posición 4 (esquina)
 
-        mymotortest2.motor_go(True, "Full", 683, .005, False, 2) #Mov de 4 a 5
+        steperMotor2.motor_go(True, "Full", 683, .005, False, 2) #Mov de 4 a 5
 
         ActivaPedal(servo_pin)                              #Baja palpador
         sleep(int(tiempoestabilizacion))                    #Tiempo de estabilización
@@ -1269,7 +1269,7 @@ def Completa2(tiempoinicial, tiempoestabilizacion, Repeticiones):
         print(MedicionBloque)
         listaMediciones.append(MedicionBloque)              #Valor del calibrando en posición 5 (esquina)
 
-        mymotortest1.motor_go(True, "Half", 178, .005, False, 2) #Mov de 5 a 6
+        steperMotor1.motor_go(True, "Half", 178, .005, False, 2) #Mov de 5 a 6
 
         ActivaPedal(servo_pin)                              #Baja palpador
         sleep(int(tiempoestabilizacion))                    #Tiempo de estabilización
@@ -1278,9 +1278,9 @@ def Completa2(tiempoinicial, tiempoestabilizacion, Repeticiones):
         print(MedicionBloque)
         listaMediciones.append(MedicionBloque)              #Valor del calibrando en posición 6 (esquina)
 
-        mymotortest1.motor_go(False, "Half", 178, .005, False, 2) #Mov de 6 a 5
-        mymotortest2.motor_go(False, "Full", 342, .005, False, 1) #Mov de 5 a Esp2
-        mymotortest1.motor_go(False, "Half", 332, .005, False, 1) #Mov de Esp2 a 1
+        steperMotor1.motor_go(False, "Half", 178, .005, False, 2) #Mov de 6 a 5
+        steperMotor2.motor_go(False, "Full", 342, .005, False, 1) #Mov de 5 a Esp2
+        steperMotor1.motor_go(False, "Half", 332, .005, False, 1) #Mov de Esp2 a 1
 
         ActivaPedal(servo_pin)                              #Baja palpador
         sleep(int(tiempoestabilizacion))                    #Tiempo de estabilización
@@ -1289,7 +1289,7 @@ def Completa2(tiempoinicial, tiempoestabilizacion, Repeticiones):
         print(MedicionBloque)
         listaMediciones.append(MedicionBloque)              #Valor del patrón en posición 1 (centro)
 
-    mymotortest1.motor_go(True, "Half", 208, .005, False, 2) #Mov de 1 a HOME
+    steperMotor1.motor_go(True, "Half", 208, .005, False, 2) #Mov de 1 a HOME
         
     ActivaPedal(servo_pin)                              #Baja palpador
     listaMediciones.append(MedicionBloque)              #Valor del patrón en posición 1 (centro)
@@ -1331,7 +1331,7 @@ def Centros(tiempoinicial, tiempoestabilizacion, Repeticiones):
         print(MedicionBloque)
         listaMediciones.append(MedicionBloque)              #Valor del patrón en posición 1 (centro)
      
-        mymotortest1.motor_go(True, "Half", 407, .005, False, 2)
+        steperMotor1.motor_go(True, "Half", 407, .005, False, 2)
                                                             #Movimiento de punto1 a punto2
         
         ActivaPedal(servo_pin)                              #Baja palpador
@@ -1341,7 +1341,7 @@ def Centros(tiempoinicial, tiempoestabilizacion, Repeticiones):
         print(MedicionBloque)
         listaMediciones.append(MedicionBloque)               #Valor del calibrando en posición 2 (esquina)
 
-        mymotortest1.motor_go(False, "Half", 410, .005, False, 2)
+        steperMotor1.motor_go(False, "Half", 410, .005, False, 2)
 
                                                             #Movimiento de punto2 a punto1
     
@@ -1352,7 +1352,7 @@ def Centros(tiempoinicial, tiempoestabilizacion, Repeticiones):
     print(MedicionBloque)
     listaMediciones.append(MedicionBloque)                  #Valor del calibrando en posición 2 (esquina)
 
-    mymotortest1.motor_go(True, "Half", 203, .005, False, 2)#Movimiento de punto1 a HOME
+    steperMotor1.motor_go(True, "Half", 203, .005, False, 2)#Movimiento de punto1 a HOME
 
     ActivaPedal(servo_pin)                                  #Baja palpador
     #obtenerAnguloBloque(valorNominalBloques[dato])          #Moverse a la siguiente pareja de bloques

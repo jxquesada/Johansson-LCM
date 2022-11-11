@@ -26,16 +26,19 @@
 
                 #Campos para Numero de certificado
                 BoxLayout:
-                    orientation: "horizontal"
+                    orientation: "vertical"
                     size_hint: 1, None
-                    height: "100dp"  
+                    height: "90dp"  
                     Label:
+                        text: "Nombre del Cliente"
                         size_hint: None,1
                         width: "250dp"
-                        text: "Número de Certificado"
+                        text_size: self.size
+                        padding: "20dp","10dp"
+                        halign: "left"
                         color: app.textColor
                     BoxLayout:
-                        padding: "20dp","25dp"
+                        padding: "20dp","5dp"
                         TextInput:
                             background_color: app.textboxColor
                             background_normal: ""
@@ -43,22 +46,25 @@
                             size_hint: 1,None
                             height: "50dp"
                             foreground_color: app.textColor
-                            halign: "center"
+                            halign: "left"
                             font_size: self.height*0.35
                             padding: 6,14,6,6
 
                 #Campos para Solicitante
                 BoxLayout:
-                    orientation: "horizontal"
+                    orientation: "vertical"
                     size_hint: 1, None
-                    height: "100dp"  
+                    height: "90dp"  
                     Label:
+                        text: "Numero de Certificado"
                         size_hint: None,1
                         width: "250dp"
-                        text: "Solicitante"
+                        text_size: self.size
+                        padding: "20dp","10dp"
+                        halign: "left"
                         color: app.textColor
                     BoxLayout:
-                        padding: "20dp","25dp"
+                        padding: "20dp","5dp"
                         TextInput:
                             background_color: app.textboxColor
                             background_normal: ""
@@ -66,23 +72,26 @@
                             size_hint: 1,None
                             height: "50dp"
                             foreground_color: app.textColor
-                            halign: "center"
+                            halign: "left"
                             font_size: self.height*0.35
                             padding: 6,14,6,6
 
                 #Campos parafolios de la bitacora
                 BoxLayout:
-                    orientation: "horizontal"
+                    orientation: "vertical"
                     size_hint: 1, None
-                    height: "100dp"  
+                    height: "90dp"  
                     Label:
+                        text: "Número de Serie"
                         size_hint: None,1
                         width: "250dp"
-                        text: "Folios de bitacora utilizada de"
+                        text_size: self.size
+                        padding: "20dp","10dp"
+                        halign: "left"
                         color: app.textColor
 
                     BoxLayout:
-                        padding: "20dp","25dp"
+                        padding: "20dp","5dp"
                         TextInput:
                             background_color: app.textboxColor
                             background_normal: ""
@@ -90,39 +99,25 @@
                             size_hint: 1,None
                             height: "50dp"
                             foreground_color: app.textColor
-                            halign: "center"
+                            halign: "left"
                             font_size: self.height*0.35
                             padding: 6,14,6,6
-                        
-                        Label:
-                            size_hint: None,1
-                            width: "15dp"
-                            text: "a"
-                            color: app.textColor
 
-                        TextInput:
-                            background_color: app.textboxColor
-                            background_normal: ""
-                            multiline: False 
-                            size_hint: 1,None
-                            height: "50dp"
-                            foreground_color: app.textColor
-                            halign: "center"
-                            font_size: self.height*0.35
-                            padding: 6,14,6,6
-                
                 #Campos para 
                 BoxLayout:
-                    orientation: "horizontal"
+                    orientation: "vertical"
                     size_hint: 1, None
-                    height: "100dp"  
+                    height: "90dp"  
                     Label:
+                        text: "Número de Activo"
                         size_hint: None,1
                         width: "250dp"
-                        text: "Solicitante"
+                        text_size: self.size
+                        padding: "20dp","10dp"
+                        halign: "left"
                         color: app.textColor
                     BoxLayout:
-                        padding: "20dp","25dp"
+                        padding: "20dp","5dp"
                         TextInput:
                             background_color: app.textboxColor
                             background_normal: ""
@@ -130,21 +125,24 @@
                             size_hint: 1,None
                             height: "50dp"
                             foreground_color: app.textColor
-                            halign: "center"
+                            halign: "left"
                             font_size: self.height*0.35
                             padding: 6,14,6,6
                 
                 BoxLayout:
-                    orientation: "horizontal"
+                    orientation: "vertical"
                     size_hint: 1, None
-                    height: "100dp"  
+                    height: "90dp"  
                     Label:
+                        text: "Marca"
                         size_hint: None,1
                         width: "250dp"
-                        text: "Solicitante"
+                        text_size: self.size
+                        padding: "20dp","10dp"
+                        halign: "left"
                         color: app.textColor
                     BoxLayout:
-                        padding: "20dp","25dp"
+                        padding: "20dp","5dp"
                         TextInput:
                             background_color: app.textboxColor
                             background_normal: ""
@@ -152,28 +150,103 @@
                             size_hint: 1,None
                             height: "50dp"
                             foreground_color: app.textColor
-                            halign: "center"
+                            halign: "left"
                             font_size: self.height*0.35
                             padding: 6,14,6,6
 
                 BoxLayout:
-                    orientation: "horizontal"
+                    orientation: "vertical"
                     size_hint: 1, None
-                    height: "100dp"  
+                    height: "90dp"  
                     Label:
+                        text: "Modelo"
                         size_hint: None,1
                         width: "250dp"
-                        text: "Opciones"
+                        text_size: self.size
+                        padding: "20dp","10dp"
+                        halign: "left"
                         color: app.textColor
                     BoxLayout:
-                        padding: "20dp","25dp"
+                        padding: "20dp","5dp"
+                        TextInput:
+                            background_color: app.textboxColor
+                            background_normal: ""
+                            multiline: False 
+                            size_hint: 1,None
+                            height: "50dp"
+                            foreground_color: app.textColor
+                            halign: "left"
+                            font_size: self.height*0.35
+                            padding: 6,14,6,6
+                
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint: 1, None
+                    height: "90dp"  
+                    Label:
+                        text: "Valor Nominal"
+                        size_hint: None,1
+                        width: "250dp"
+                        text_size: self.size
+                        padding: "20dp","10dp"
+                        halign: "left"
+                        color: app.textColor
+                    BoxLayout:
+                        padding: "20dp","5dp"
+                        TextInput:
+                            background_color: app.textboxColor
+                            background_normal: ""
+                            multiline: False 
+                            size_hint: 1,None
+                            height: "50dp"
+                            foreground_color: app.textColor
+                            halign: "left"
+                            font_size: self.height*0.35
+                            padding: 6,14,6,6
+                
+                # BoxLayout:
+                #     orientation: "vertical"
+                #     size_hint: 1, None
+                #     height: "90dp"  
+                #     Label:
+                #         size_hint: None,1
+                #         width: "250dp"
+                #         text: "Valor Nominal"
+                #         color: app.textColor
+                #     BoxLayout:
+                #         padding: "20dp","5dp"
+                #         TextInput:
+                #             background_color: app.textboxColor
+                #             background_normal: ""
+                #             multiline: False 
+                #             size_hint: 1,None
+                #             height: "50dp"
+                #             foreground_color: app.textColor
+                #             halign: "left"
+                #             font_size: self.height*0.35
+                #             padding: 6,14,6,6
+
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint: 1, None
+                    height: "90"  
+                    Label:
+                        text: "Cuadrante"
+                        size_hint: None,1
+                        width: "250dp"
+                        text_size: self.size
+                        padding: "20dp","10dp"
+                        halign: "left"
+                        color: app.textColor
+                    BoxLayout:
+                        padding: "60dp","5dp"
 
                         BoxLayout:
                             padding: "0dp","0dp","10dp","0dp"
                             Label:
                                 size_hint: None,1
-                                width: "25dp"
-                                text: "1"
+                                width: "61"
+                                text: "NORTE"
                                 color: app.textColor
                             CheckBox:
                                 size_hint: None,1
@@ -187,8 +260,8 @@
                             padding: "0dp","0dp","10dp","0dp"   
                             Label:
                                 size_hint: None,1
-                                width: "25dp"
-                                text: "2"
+                                width: "61"
+                                text: "SUR"
                                 color: app.textColor
                             CheckBox:
                                 size_hint: None,1
@@ -202,8 +275,8 @@
                             padding: "0dp","0dp","10dp","0dp"
                             Label:
                                 size_hint: None,1
-                                width: "25dp"
-                                text: "3"
+                                width: "61"
+                                text: "ESTE"
                                 color: app.textColor
                             CheckBox:
                                 size_hint: None,1
@@ -211,4 +284,35 @@
                                 pos_hint: { "center": -1 }
                                 width: "25dp"
                                 background_radio_normal: "icons/radioButton.png"
-                               
+
+                        BoxLayout:
+                            padding: "0dp","0dp","10dp","0dp"
+                            Label:
+                                size_hint: None,1
+                                width: "61"
+                                text: "OESTE"
+                                color: app.textColor
+                            CheckBox:
+                                size_hint: None,1
+                                group: "Opciones"
+                                pos_hint: { "center": -1 }
+                                width: "25dp"
+                                background_radio_normal: "icons/radioButton.png"
+                BoxLayout:
+                    padding: "20dp","20dp"
+                    orientation: "vertical"
+                    size_hint: 1, None
+                    # height: self.minimum_height
+                    Label:
+                        text: ""
+                        size_hint: 0.8, 1
+                    Button:
+                        pos_hint: {"center_x": 0.9, "top": 1 }
+                        size_hint: 0.2,None
+                        height: "50dp"
+                        width: "200dp"
+                        text: "Continuar"
+                        color: app.textColor
+                        background_normal: ''
+                        background_color: app.generalButtonColor
+                        # on_release: app.root.createUser(new_user_fullname.text, new_user_email.text, new_user_phone_number.text)               

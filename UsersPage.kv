@@ -101,16 +101,22 @@
 
 
                     BoxLayout:
-                        # padding: "20dp","0dp"
+                        padding: "20dp","20dp"
                         orientation: "vertical"
                         size_hint: 1, None
                         # height: self.minimum_height
+                        Label:
+                            text: ""
+                            size_hint: 0.7, 1
                         Button:
-                            pos_hint: {"center_x": 0.5, "top": 1 }
-                            size_hint: None,None
+                            pos_hint: {"center_x": 0.85, "top": 1 }
+                            size_hint: 0.3,None
                             height: "50dp"
                             width: "200dp"
                             text: "Agregar Usuario"
+                            color: app.textColor
+                            background_normal: ''
+                            background_color: app.generalButtonColor
                             on_release: app.root.createUser(new_user_fullname.text, new_user_email.text, new_user_phone_number.text)
                         
 

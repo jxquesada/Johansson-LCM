@@ -114,13 +114,14 @@ class JohanssonApp(App):
     Usada para inicializar la GUI principal y contine 
     los parametros y funciones globales de la app
     """
-    Settings = bef.loadSettings()
-    backgoundColorDarkLv10 = ColorProperty((0.95, 0.95, 0.95, 1))
-    backgoundColorDarkLv20 = ColorProperty((0, 0, 0, 0.1))
-    backgoundColorDarkLv30 = ColorProperty((0.8, 0.8, 0.85, 0))
-    menuButtonColor        = ColorProperty((0.95, 0.95, 0.95, 1))
-    textboxColor           = ColorProperty((0, 0, 0, 0.1))
-    textColor              = ColorProperty((0, 0, 0, 1))
+    Settings = bef.loadSettings()                                   #Light                  or      Dark
+    backgoundColorDarkLv10 = ColorProperty((1, 1, 1, 1))            # 1, 1, 1, 1            or      0.2, 0.2, 0.2, 1
+    backgoundColorDarkLv20 = ColorProperty((0, 0, 0, 0.1))          #
+    backgoundColorDarkLv30 = ColorProperty((0, 0, 0, 0.05))
+    menuButtonColor        = ColorProperty((0.95, 0.95, 0.95, 1))      # 0.95, 0.95, 0.95, 1      or      0.15, 0.15, 0.15, 1
+    generalButtonColor     = ColorProperty((0.1, 0.7, 0.9, 1))      # 0.1, 0.7, 0.9, 1      or      0.3, 0.3, 0.3, 1
+    textboxColor           = ColorProperty((0, 0, 0, 0.05))
+    textColor              = ColorProperty((0, 0, 0, 1))            # 0, 0, 0, 1            or      1, 1, 1, 1
     
     def changeTheme(self, darkThemeSwitchState):
         """"Esta funcion se encarga de realizar el cambio de Tema de color de la interfaz

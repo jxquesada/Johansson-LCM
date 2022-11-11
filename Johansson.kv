@@ -61,69 +61,77 @@
                 size_hint: 1, None
                 height: "300dp"
                 pos_hint: { "center": 1 }
-                        
-                Button:
-                    text: "Calibrar Bloques"
-                    background_normal: ''
-                    color: app.textColor
-                    background_color: app.menuButtonColor
+                BoxLayout:
+                    padding: "5dp","2.5dp"
+                    Button:
+                        padding: "20dp","20dp"
+                        text: "Calibrar Bloques"
+                        background_normal: ''
+                        color: app.textColor
+                        background_color: app.menuButtonColor
+                        on_press: root.blocksCalibrationButton_click(current_menu_page)
 
-                    on_press: root.blocksCalibrationButton_click(current_menu_page)
-                    
-                Button:
-                    text: "Resultados"
-                    size_hint: 1, 1
-                    background_normal: ''
-                    color: app.textColor
-                    background_color: app.menuButtonColor
+                BoxLayout:
+                    padding: "5dp","2.5dp"
+                    Button:
+                        text: "Resultados"
+                        size_hint: 1, 1
+                        background_normal: ''
+                        color: app.textColor
+                        background_color: app.menuButtonColor
+                        on_press: root.resultsButton_click(current_menu_page)
 
-                    on_press: root.resultsButton_click(current_menu_page)
+                BoxLayout:
+                    padding: "5dp","2.5dp"
+                    Button:
+                        text: "Patrones"
+                        background_normal: ''
+                        color: app.textColor
+                        background_color: app.menuButtonColor
+                        on_press: root.patternsButton_click(current_menu_page)
 
-                Button:
-                    text: "Patrones"
-                    background_normal: ''
-                    color: app.textColor
-                    background_color: app.menuButtonColor
+                BoxLayout:
+                    padding: "5dp","2.5dp"
+                    Button:
+                        text: "Usuarios"
+                        background_normal: ''
+                        color: app.textColor
+                        background_color: app.menuButtonColor
+                        on_press: root.usersButton_click(current_menu_page)
+                        on_press: print("hello")
 
-                    on_press: root.patternsButton_click(current_menu_page)
-                Button:
-                    text: "Usuarios"
-                    background_normal: ''
-                    color: app.textColor
-                    background_color: app.menuButtonColor
+                BoxLayout:
+                    padding: "5dp","2.5dp"
+                    Button:
+                        text: "Configuracion"
+                        color: 1, 1, 1, 1
+                        size_hint: 1, 1
+                        background_normal: ''
+                        color: app.textColor
+                        background_color: app.menuButtonColor
 
-                    on_press: root.usersButton_click(current_menu_page)
-                    on_press: print("hello")
-                Button:
-                    text: "Configuracion"
-                    color: 1, 1, 1, 1
-                    size_hint: 1, 1
-                    background_normal: ''
-                    color: app.textColor
-                    background_color: app.menuButtonColor
-
-                    on_release: root.configurationButton_click(current_menu_page)
+                        on_release: root.configurationButton_click(current_menu_page)
                     
 
         Label:
-            canvas.before:
-                Color:
-                    rgba: app.backgoundColorDarkLv10#
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+            # canvas.before:
+            #     Color:
+            #         rgba: app.backgoundColorDarkLv10#
+            #     Rectangle:
+            #         pos: self.pos
+            #         size: self.size
             size_hint: 1, 0.3
             color: app.textColor
             text: "Comparador de Bloques\n                LCM\n         Version "+Version 
     
     BoxLayout:
         orientation: "vertical"
-        # canvas.before:
-        #     Color:
-        #         rgba: root.backgoundColorDarkLv30#
-        #     Rectangle:
-        #         pos: self.pos
-        #         size: self.size
+        canvas.before:
+            Color:
+                rgba: app.backgoundColorDarkLv30#
+            Rectangle:
+                pos: self.pos
+                size: self.size
         Label:
             #id: selectedSection_title
             text: root.selectedButtonName
