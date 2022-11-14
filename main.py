@@ -5,6 +5,7 @@ from kivy.properties import ObjectProperty
 from kivy.properties import StringProperty
 from kivy.properties import NumericProperty
 from kivy.properties import ColorProperty
+from kivy.metrics import dp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
@@ -12,7 +13,7 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.scrollview import ScrollView
-import backend as bef
+from backend import loadSettings
 
 
 
@@ -22,54 +23,77 @@ Builder.load_file('UsersPage.kv')
 Builder.load_file('CalibrationPage.kv')
 Builder.load_file('ResultsPage.kv')
 Builder.load_file('PatternsPage.kv')
+Builder.load_file('BlocksPage.kv')
 
 
 print(round(0.12315,2))                                                                                                                                                         
 
-# class HomeWidget(BoxLayout):#BoxLayout Widget:
-#     """
-#     Elemento principal usado para agregar personalizar la interfaz
-#     """
-#     pass
+
 class HomeMenuPageManager(ScreenManager):
     pass
 
 class HomeBoxLayout(BoxLayout):
-    temperatureText = StringProperty("Temperatura")
+    temperatureText = StringProperty("18.99")
+    warningText = StringProperty("Advertencia la temperatura está fuera de los límites")
+    warningTextHeight = NumericProperty(dp(25))
+    warningColor = ColorProperty((1,1,0.4,1))
     selectedButtonName = StringProperty("Home")
     # ConfigurationPageOpacity = NumericProperty(0)
     # UsersPageOpacity = NumericProperty(0)
     
+    def switchWarningNotification(self, switchState):
+        match switchState:
+            case True:
+                self.warningTextHeight = dp(25)
+                self.warningColor = (1,1,0.4,1)
+                self.warningText = "Advertencia la temperatura está fuera de los límites"
 
-
+            case False:
+                self.warningTextHeight = dp(0)
+                self.warningColor = (0,0,0,0)
+                self.warningText = ""
+            case other:
+                self.warningTextHeight = dp(25)
+                self.warningColor = (1,0.5,0.4,1)
+                self.warningText = "No se reciven datos de temperatura"
 
     def configurationButton_click(self, ScreenManager):
-        self.temperatureText = "Configuracion Selecionado"
+        self.temperatureText = "19.00"
+        self.switchWarningNotification(False)
         self.selectedButtonName = "Configuracion"
         ScreenManager.current = "ConfigurationPage"
 
 
     def usersButton_click(self, ScreenManager):
-        self.temperatureText = "Usuarios Selecionado"
+        self.temperatureText = "21.00"
+        self.switchWarningNotification(False)
         self.selectedButtonName = "Usuarios"
         ScreenManager.current = "UsersPage"
 
 
     def blocksCalibrationButton_click(self, ScreenManager):
-        self.temperatureText = "Calibración de Bloques Selecionado"
+        self.temperatureText = "21.01"
+        self.switchWarningNotification(True)
         self.selectedButtonName = "Calibración de Bloques"
         ScreenManager.current = "CalibrationPage"
 
     def resultsButton_click(self, ScreenManager):
-        self.temperatureText = "Resultados Selecionado"
-        self.selectedButtonName = "Resultados"
+        self.temperatureText = "20.00"
+        self.switchWarningNotification(False)
         ScreenManager.current = "ResultsPage"
         
     def patternsButton_click(self, ScreenManager):
-        self.temperatureText = "Patrones Selecionado"
+        self.temperatureText = "--.--"
+        self.switchWarningNotification(None)
         self.selectedButtonName = "Patrones"
         ScreenManager.current = "PatternsPage"
-    
+
+    def blocksButton_click(self, ScreenManager):
+        self.temperatureText = "18.99"
+        self.switchWarningNotification(True)
+        self.selectedButtonName = "Bloques"
+        ScreenManager.current = "BlocksPage"
+
     def createUser(self, new_user_fullname, new_user_email, new_user_phone_number):
         print("New User created with the following data:\n"+new_user_fullname+"\n"+new_user_email+"\n"+new_user_phone_number)
     
@@ -114,7 +138,7 @@ class JohanssonApp(App):
     Usada para inicializar la GUI principal y contine 
     los parametros y funciones globales de la app
     """
-    Settings = bef.loadSettings()                                   #Light                  or      Dark
+    Settings = loadSettings()                                   #Light                  or      Dark
     backgoundColorDarkLv10 = ColorProperty((1, 1, 1, 1))            # 1, 1, 1, 1            or      0.2, 0.2, 0.2, 1
     backgoundColorDarkLv20 = ColorProperty((0, 0, 0, 0.1))          #
     backgoundColorDarkLv30 = ColorProperty((0, 0, 0, 0.05))
@@ -138,8 +162,8 @@ class JohanssonApp(App):
             self.Settings["DarkTheme"] = darkThemeSwitchState
         pass
     
-    def setColorTheme(self):
-        bef.setColorTheme(self.Settings)
+    # def setColorTheme(self):
+    #     bef.setColorTheme(self.Settings)
 
 
     def build(self):

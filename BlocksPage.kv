@@ -1,0 +1,329 @@
+#:kivy 2.1.0
+#UsersPage:
+#:set backgoundColorDarkLv1 0.15, 0.15, 0.15, 1
+#:set backgoundColorDarkLv2 0.125, 0.125, 0.125, 1
+#:set backgoundColorDarkLv3 0.1, 0.1, 0.1, 1
+#:set menuButtonColor       0.15, 0.15, 0.15, 1
+#:set menuButtonColorHighlight       0.17, 0.17, 0.17, 1
+#:set textColorDark         1, 1, 1, 1
+#:set lineColorDark         1, 1, 1, 1
+
+<BlocksPageLayout>:
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: 1,0.9
+            ScrollView:
+                scroll_type: ["bars"]
+                bar_width: 5
+                bar_inactive_color: self.bar_color
+                StackLayout:
+                    orientation: "lr-tb"
+                    size_hint: 1, None
+                    height: self.minimum_height
+
+                    #Campos para Numero de certificado
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint: 1, None
+                        height: "90dp"  
+
+                        #Barra de busqueda
+                        BoxLayout:
+                            orientation: "horizontal"
+                            padding: "20dp","5dp"
+                            #filtro
+                            Spinner:
+                                size_hint: None,None
+                                text: "Filtro"
+                                values:["Cliente", "Marca", "Modelo"]
+                                width: "100dp"
+                                height: "50dp"
+                                color: app.textColor
+                                background_normal: ''
+                                background_color: app.generalButtonColor
+                                Image:
+                                    source: 'icons/dropDownIcon.png'
+                                    size_hint: None,None
+                                    x: self.parent.x
+                                    y: self.parent.y
+                                    keep_ratio: False
+                                    allow_stretch: True
+                            #texto de busqueda
+                            TextInput:
+                                hint_text: "Buscar"
+                                background_color: app.textboxColor
+                                background_normal: ""
+                                multiline: False 
+                                size_hint: 1,None
+                                height: "50dp"
+                                foreground_color: app.textColor
+                                halign: "left"
+                                font_size: self.height*0.35
+                                padding: 6,14,6,6
+                            #texto de busqueda
+                            Button:
+                                size_hint: None,None
+                                width: "50dp"
+                                height: "50dp"
+                                color: app.textColor
+                                background_normal: ''
+                                background_color: app.generalButtonColor
+                                Image:
+                                    source: 'icons/searchIcon.png'
+                                    size_hint: None,None
+                                    width: self.parent.width
+                                    height: self.parent.height
+                                    x: self.parent.x
+                                    y: self.parent.y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                                
+                                
+
+                    #Campos para Solicitante
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint: 1, None
+                        height: "90dp"  
+                        Label:
+                            text: "Numero de Certificado"
+                            size_hint: None,1
+                            width: "250dp"
+                            text_size: self.size
+                            padding: "20dp","10dp"
+                            halign: "left"
+                            color: app.textColor
+                        BoxLayout:
+                            padding: "20dp","5dp"
+                            TextInput:
+                                background_color: app.textboxColor
+                                background_normal: ""
+                                multiline: False 
+                                size_hint: 1,None
+                                height: "40dp"
+                                foreground_color: app.textColor
+                                halign: "left"
+                                font_size: self.height*0.35
+                                padding: 6,14,6,6
+
+                    #Campos parafolios de la bitacora
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint: 1, None
+                        height: "90dp"  
+                        Label:
+                            text: "Número de Serie"
+                            size_hint: None,1
+                            width: "250dp"
+                            text_size: self.size
+                            padding: "20dp","10dp"
+                            halign: "left"
+                            color: app.textColor
+
+                        BoxLayout:
+                            padding: "20dp","5dp"
+                            TextInput:
+                                background_color: app.textboxColor
+                                background_normal: ""
+                                multiline: False 
+                                size_hint: 1,None
+                                height: "40dp"
+                                foreground_color: app.textColor
+                                halign: "left"
+                                font_size: self.height*0.35
+                                padding: 6,14,6,6
+
+                    #Campos para 
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint: 1, None
+                        height: "90dp"  
+                        Label:
+                            text: "Número de Activo"
+                            size_hint: None,1
+                            width: "250dp"
+                            text_size: self.size
+                            padding: "20dp","10dp"
+                            halign: "left"
+                            color: app.textColor
+                        BoxLayout:
+                            padding: "20dp","5dp"
+                            TextInput:
+                                background_color: app.textboxColor
+                                background_normal: ""
+                                multiline: False 
+                                size_hint: 1,None
+                                height: "40dp"
+                                foreground_color: app.textColor
+                                halign: "left"
+                                font_size: self.height*0.35
+                                padding: 6,14,6,6
+                    
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint: 1, None
+                        height: "90dp"  
+                        Label:
+                            text: "Marca"
+                            size_hint: None,1
+                            width: "250dp"
+                            text_size: self.size
+                            padding: "20dp","10dp"
+                            halign: "left"
+                            color: app.textColor
+                        BoxLayout:
+                            padding: "20dp","5dp"
+                            TextInput:
+                                background_color: app.textboxColor
+                                background_normal: ""
+                                multiline: False 
+                                size_hint: 1,None
+                                height: "40dp"
+                                foreground_color: app.textColor
+                                halign: "left"
+                                font_size: self.height*0.35
+                                padding: 6,14,6,6
+
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint: 1, None
+                        height: "90dp"  
+                        Label:
+                            text: "Modelo"
+                            size_hint: None,1
+                            width: "250dp"
+                            text_size: self.size
+                            padding: "20dp","10dp"
+                            halign: "left"
+                            color: app.textColor
+                        BoxLayout:
+                            padding: "20dp","5dp"
+                            TextInput:
+                                background_color: app.textboxColor
+                                background_normal: ""
+                                multiline: False 
+                                size_hint: 1,None
+                                height: "40dp"
+                                foreground_color: app.textColor
+                                halign: "left"
+                                font_size: self.height*0.35
+                                padding: 6,14,6,6
+                    
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint: 1, None
+                        height: "90dp"  
+                        Label:
+                            text: "Valor Nominal"
+                            size_hint: None,1
+                            width: "250dp"
+                            text_size: self.size
+                            padding: "20dp","10dp"
+                            halign: "left"
+                            color: app.textColor
+                        BoxLayout:
+                            padding: "20dp","5dp"
+                            TextInput:
+                                background_color: app.textboxColor
+                                background_normal: ""
+                                multiline: False 
+                                size_hint: 1,None
+                                height: "40dp"
+                                foreground_color: app.textColor
+                                halign: "left"
+                                font_size: self.height*0.35
+                                padding: 6,14,6,6
+                    
+
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint: 1, None
+                        height: "90"  
+                        Label:
+                            text: "Cuadrante"
+                            size_hint: None,1
+                            width: "250dp"
+                            text_size: self.size
+                            padding: "20dp","10dp"
+                            halign: "left"
+                            color: app.textColor
+                        BoxLayout:
+                            padding: "60dp","5dp"
+
+                            BoxLayout:
+                                padding: "0dp","0dp","10dp","0dp"
+                                Label:
+                                    size_hint: None,1
+                                    width: "61"
+                                    text: "NORTE"
+                                    color: app.textColor
+                                CheckBox:
+                                    size_hint: None,1
+                                    group: "Opciones"
+                                    pos_hint: { "x": 0 }
+                                    width: "25dp"
+                                    background_radio_normal: "icons/radioButton.png"
+                                    padding: "0dp","0dp","50dp","0dp"
+
+                            BoxLayout:
+                                padding: "0dp","0dp","10dp","0dp"   
+                                Label:
+                                    size_hint: None,1
+                                    width: "61"
+                                    text: "SUR"
+                                    color: app.textColor
+                                CheckBox:
+                                    size_hint: None,1
+                                    group: "Opciones"
+                                    pos_hint: { "center": -1 }
+                                    width: "25dp"
+                                    background_radio_normal: "icons/radioButton.png"
+                                    padding: "0dp","0dp","500dp","0dp"
+
+                            BoxLayout:
+                                padding: "0dp","0dp","10dp","0dp"
+                                Label:
+                                    size_hint: None,1
+                                    width: "61"
+                                    text: "ESTE"
+                                    color: app.textColor
+                                CheckBox:
+                                    size_hint: None,1
+                                    group: "Opciones"
+                                    pos_hint: { "center": -1 }
+                                    width: "25dp"
+                                    background_radio_normal: "icons/radioButton.png"
+
+                            BoxLayout:
+                                padding: "0dp","0dp","10dp","0dp"
+                                Label:
+                                    size_hint: None,1
+                                    width: "61"
+                                    text: "OESTE"
+                                    color: app.textColor
+                                CheckBox:
+                                    size_hint: None,1
+                                    group: "Opciones"
+                                    pos_hint: { "center": -1 }
+                                    width: "25dp"
+                                    background_radio_normal: "icons/radioButton.png"
+        BoxLayout:
+            padding: "20dp","20dp"
+            orientation: "vertical"
+            size_hint: 1, None
+            # height: self.minimum_height
+            Label:
+                text: ""
+                size_hint: 0.8, 1
+            Button:
+                pos_hint: {"center_x": 0.9, "top": 1 }
+                size_hint: 0.2,None
+                height: "50dp"
+                width: "200dp"
+                text: "Continuar"
+                color: app.textColor
+                background_normal: ''
+                background_color: app.generalButtonColor
+                # on_release: app.root.createUser(new_user_fullname.text, new_user_email.text, new_user_phone_number.text)               

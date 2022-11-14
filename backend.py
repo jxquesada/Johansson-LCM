@@ -1,25 +1,19 @@
-import RPi.GPIO as GPIO             #Biblioteca para el control de los motores a pasos y el servomotor
-from RpiMotorLib import RpiMotorLib #Biblioteca para motores a pasos
-from RpiMotorLib import rpiservolib #Biblioteca para servomotor
-import time
-from time import sleep              #Biblioteca para sleep
-import serial                       #Biblioteca para configuración y adquisición de datos de dispositivos seriales
-import openpyxl                     #Biblioteca para hojas de datos
+# import RPi.GPIO as GPIO             #Biblioteca para el control de los motores a pasos y el servomotor
+# from RpiMotorLib import RpiMotorLib #Biblioteca para motores a pasos
+# from RpiMotorLib import rpiservolib #Biblioteca para servomotor
+# import time
+# from time import sleep              #Biblioteca para sleep
+# import serial                       #Biblioteca para configuración y adquisición de datos de dispositivos seriales
+# import openpyxl                     #Biblioteca para hojas de datos
 
 
 
 #####################################################
 #####################################################
 #####################################################
-
 ## Definicion de Constantes
-motorEnabledState = GPIO.HIGH
-motorDisabledState = GPIO.LOW
-
-
-
-
-
+# motorEnabledState = GPIO.HIGH
+# motorDisabledState = GPIO.LOW
 #/////////////////////////////////////////////
 #////////////////////////////////////////////
 
@@ -32,29 +26,29 @@ motorDisabledState = GPIO.LOW
 pin_motor1Mode = (22, 27, 17)               #pines de modo para el motor1
 pin_motor1Direction = 9                     #pin de dirección para el motor1
 pin_motor1Step = 11                         #pin de step para el motor1
-steperMotor1 = RpiMotorLib.A4988Nema(pin_motor1Direction,
-                                    pin_motor1Step, 
-                                    pin_motor1Mode, 
-                                    "A4988")
+# steperMotor1 = RpiMotorLib.A4988Nema(pin_motor1Direction,
+#                                     pin_motor1Step, 
+#                                     pin_motor1Mode, 
+#                                     "A4988")
 
 
     #Puertos para el motor 2(Vertical)
 pin_motor2Mode = (5, 6, 13)                 #pines de modo para el motor2
 pin_motor2Direction = 20                    #pin de dirección para el motor2
 pin_motor2Step = 21                         #pin de step para el motor2
-steperMotor2 = RpiMotorLib.A4988Nema(pin_motor2Direction, 
-                                    pin_motor2Step, 
-                                    pin_motor2Mode,
-                                    "A4988")
+# steperMotor2 = RpiMotorLib.A4988Nema(pin_motor2Direction, 
+#                                     pin_motor2Step, 
+#                                     pin_motor2Mode,
+#                                     "A4988")
 
     #Puertos para el motor del plato giratorio
 pin_motorPlateMode = (14, 15, 18)               #Pines de modo de paso
 pin_motorPlateDirection = 19                    #Pin de sentido de giro
 pin_motorPlateStep = 16                         #Pin de dar paso
-steperMotorPlate = RpiMotorLib.A4988Nema(pin_motorPlateDirection, 
-                                pin_motorPlateStep, 
-                                pin_motorPlateMode, 
-                                "A4988")
+# steperMotorPlate = RpiMotorLib.A4988Nema(pin_motorPlateDirection, 
+#                                 pin_motorPlateStep, 
+#                                 pin_motorPlateMode, 
+#                                 "A4988")
 
 #Seteando el pin para habilidar los motores
     #Pin para los motores de calibracion                                        
@@ -79,41 +73,40 @@ servo_pin = 26
 
 
 #Puerto Serial para TESA
-serTESA=serial.Serial('/dev/ttyUSBI', baudrate=1200, bytesize=serial.SEVENBITS, parity=serial.PARITY_EVEN,
-                          stopbits=serial.STOPBITS_TWO, xonxoff=True, timeout=0.5) #Configuración de puerto
-
-
-######################################################################################################################################
-
-
+# serTESA=serial.Serial('/dev/ttyUSBI', baudrate=1200, bytesize=serial.SEVENBITS, parity=serial.PARITY_EVEN,
+#                         stopbits=serial.STOPBITS_TWO, xonxoff=True, timeout=0.5) #Configuración de puerto
+def rpiSetup():
+    ######################################################################################################################################
 
 
 
 
 
-#Mapeado todos los puertos a la rapberry pi4
-GPIO.setup(pin_enableCalibrationMotor, GPIO.OUT)                                                                                                            
-GPIO.output(pin_enableCalibrationMotor, motorDisabledState)       #Modo seguro, motores inhabilitados
-
-GPIO.setup(pin_enablePlateMotor, GPIO.OUT)                                                                                                                                            
-GPIO.output(pin_enablePlateMotor, motorDisabledState)       #Modo seguro, motores de plato inhabilitados
-
-GPIO.setup(pin_startRotationLimitSensor, GPIO.IN)    #Se define como entrada el sensor
-
-GPIO.setup(sleepMot3, GPIO.OUT)                                                                                                                                                
-GPIO.output(sleepMot3, GPIO.LOW)       #Sleep debe estar en LOW para deshabilitarse
-
-GPIO.setmode(GPIO.BCM)              #Numeración Broadcom
 
 
-# posicionStep=0                      #Variable de posición angular del disco
-# required=0                          #Variable de pasos requeridos par llegar
-#                                     #a la posicion deseada
-# listo=0                             #Variable que determina cuando terminó
+    #Mapeado todos los puertos a la rapberry pi4
+    GPIO.setup(pin_enableCalibrationMotor, GPIO.OUT)                                                                                                            
+    GPIO.output(pin_enableCalibrationMotor, motorDisabledState)       #Modo seguro, motores inhabilitados
+
+    GPIO.setup(pin_enablePlateMotor, GPIO.OUT)                                                                                                                                            
+    GPIO.output(pin_enablePlateMotor, motorDisabledState)       #Modo seguro, motores de plato inhabilitados
+
+    GPIO.setup(pin_startRotationLimitSensor, GPIO.IN)    #Se define como entrada el sensor
+
+    GPIO.setup(sleepMot3, GPIO.OUT)                                                                                                                                                
+    GPIO.output(sleepMot3, GPIO.LOW)       #Sleep debe estar en LOW para deshabilitarse
+
+    GPIO.setmode(GPIO.BCM)              #Numeración Broadcom
 
 
-######################################################################################################################################################
-######################################################################################################################################################
+    # posicionStep=0                      #Variable de posición angular del disco
+    # required=0                          #Variable de pasos requeridos par llegar
+    #                                     #a la posicion deseada
+    # listo=0                             #Variable que determina cuando terminó
+
+
+    ######################################################################################################################################################
+    ######################################################################################################################################################
 
 
 
@@ -237,11 +230,11 @@ def Completa1(valorNominalBloque, tiempoinicial, tiempoestabilizacion, Repeticio
     
     for i in range(int(Repeticiones)):
 
-        ActivaPedal(servo_pin) #Baja palpador
-        sleep(int(tiempoestabilizacion)) #Tiempo de estabilización
-        ActivaPedal(servo_pin) #Sube palpador
-        MedicionBloque=DatosTESA() #Llama función TESA
-        listaMediciones.append(MedicionBloque) #Valor del patrón en posición 1 (centro)
+        ActivaPedal(servo_pin)                          #Baja palpador
+        sleep(int(tiempoestabilizacion))                #Tiempo de estabilización
+        ActivaPedal(servo_pin)                          #Sube palpador
+        MedicionBloque=DatosTESA()                      #Llama función TESA
+        listaMediciones.append(MedicionBloque)          #Valor del patrón en posición 1 (centro)
         print(MedicionBloque)
 
         steperMotor1.motor_go(True, "Half", 417, .005, False, 2) #Mov de 1 a 2

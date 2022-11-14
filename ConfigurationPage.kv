@@ -24,7 +24,7 @@
             orientation: "vertical"
             size_hint: 1,0.9
             ScrollView:
-            
+                scroll_type: ["bars"]
                 StackLayout:
                     orientation: "lr-tb"
                     size_hint: 1, None
@@ -66,7 +66,7 @@
                                 min: 21
                                 max: 30
                             Label:
-                                text: str(round(maxTempSlider.value,1))+"ºC"
+                                text: str(round(maxTempSlider.value,2))+"ºC"
                                 size_hint: 0.1,1
                                 color: app.textColor
 
@@ -88,7 +88,7 @@
                                 min: 10
                                 max: 19
                             Label:
-                                text: str(round(minTempSlider.value,1))+"ºC"
+                                text: str(round(minTempSlider.value,2))+"ºC"
                                 size_hint: 0.1,1
                                 color: app.textColor
                         

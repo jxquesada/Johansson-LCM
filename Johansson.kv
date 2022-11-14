@@ -6,6 +6,7 @@
 #:import CalibrationPageLayout CalibrationPage
 #:import ResultsPageLayout ResultsPage
 #:import PatternsPageLayout PatternsPage
+#:import BlocksPageLayout BlocksPage
 
 #Costantes generales
 
@@ -47,14 +48,26 @@
             size_hint: 1,0.5
             Image:
                 source: "icons/LCM_logo.png"
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1,0.40
+            BoxLayout:
+                padding: "70dp","0dp","0dp","1dp"        
+                Label:
+                    text: root.temperatureText
+                    font_name: "fonts\Lcd.ttf"
+                    font_size: "50dp"
+                    color: app.textColor
+            BoxLayout:
+                padding: "0dp","0dp","25dp","0dp"
+                Label:
+                    text: "°C"
+                    font_size: "40dp"
+                    color: app.textColor
                 
-        Label:
-            text: root.temperatureText
-            size_hint: 1, 0.5
-            color: app.textColor
-            #background_color: backgoundColorDarkLv1
         
         ScrollView:
+            scroll_type: ["bars"]
             BoxLayout:
 
                 orientation: "vertical"
@@ -62,7 +75,7 @@
                 height: "300dp"
                 pos_hint: { "center": 1 }
                 BoxLayout:
-                    padding: "5dp","2.5dp"
+                    padding: "5dp","1dp"
                     Button:
                         padding: "20dp","20dp"
                         text: "Calibrar Bloques"
@@ -72,7 +85,7 @@
                         on_press: root.blocksCalibrationButton_click(current_menu_page)
 
                 BoxLayout:
-                    padding: "5dp","2.5dp"
+                    padding: "5dp","1dp"
                     Button:
                         text: "Resultados"
                         size_hint: 1, 1
@@ -82,16 +95,28 @@
                         on_press: root.resultsButton_click(current_menu_page)
 
                 BoxLayout:
-                    padding: "5dp","2.5dp"
+                    padding: "5dp","1dp"
                     Button:
                         text: "Patrones"
                         background_normal: ''
                         color: app.textColor
                         background_color: app.menuButtonColor
                         on_press: root.patternsButton_click(current_menu_page)
+                
+                BoxLayout:
+                    padding: "5dp","1dp"
+                    Button:
+                        text: "Bloques"
+                        color: 1, 1, 1, 1
+                        size_hint: 1, 1
+                        background_normal: ''
+                        color: app.textColor
+                        background_color: app.menuButtonColor
+
+                        on_release: root.blocksButton_click(current_menu_page)
 
                 BoxLayout:
-                    padding: "5dp","2.5dp"
+                    padding: "5dp","1dp"
                     Button:
                         text: "Usuarios"
                         background_normal: ''
@@ -101,7 +126,7 @@
                         on_press: print("hello")
 
                 BoxLayout:
-                    padding: "5dp","2.5dp"
+                    padding: "5dp","1dp"
                     Button:
                         text: "Configuracion"
                         color: 1, 1, 1, 1
@@ -131,20 +156,54 @@
                 rgba: app.backgoundColorDarkLv30#
             Rectangle:
                 pos: self.pos
-                size: self.size
-        Label:
-            #id: selectedSection_title
-            text: root.selectedButtonName
+                size: self.size   
+        BoxLayout:
+            orientation: "vertical"
             size_hint: 1, 0.1
-            color: app.textColor
             canvas.before:
                 Color:
-                    rgba: app.backgoundColorDarkLv20#
+                    rgba: app.backgoundColorDarkLv30#
                 Rectangle:
                     pos: self.pos
                     size: self.size
+            Label:
+                #id: selectedSection_title
+                text: root.selectedButtonName
+                size_hint: 1, 0.1
+                color: app.textColor
+                
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: 1, None
+            height: root.warningTextHeight
+            padding: "5dp","0dp"
+            canvas.before:
+                Color:
+                    rgba: app.backgoundColorDarkLv30#
+                Rectangle:
+                    pos: self.pos
+                    size: self.size    
+            Button:
+                text: root.warningText
+                bold: True
+                size_hint: 1,1
+                font_size: "15dp"
+                color: (0,0,0,1)
+                background_normal: 'icons/warningBackground.png'
+                background_down: 'icons/warningBackground.png'
+                background_color: root.warningColor
+                # Image:
+                #     source: 'icons/warningBackground.png'
+                #     size_hint: None,None
+                #     width: self.parent.width
+                #     height: self.parent.height
+                #     x: self.parent.x
+                #     y: self.parent.y
+                #     keep_ratio: True
+                #     allow_stretch: True
+         
             
-        
         # ScrollView:
         #     RelativeLayout:
         #         pos: self.pos
@@ -170,6 +229,8 @@
                 name: "ResultsPage"
             PatternsPageLayout:
                 name: "PatternsPage"
+            BlocksPageLayout:
+                name: "BlocksPage"
  
                     
             
